@@ -25,3 +25,9 @@
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/results/selected_only_policy_summary.csv", "reason": "Selected-only controller gate metrics including low-regression and overhead status."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/results/goodput_baseline_comparison.csv", "reason": "Selected-only goodput baseline comparison required by critique D."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/results/curve_robustness_matrix.csv", "reason": "Core and remote working-set robustness evidence."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/scripts/search_a_level_mechanisms.py", "reason": "Reproducible A-level mechanism search and T8 threshold sweep script."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/innovation_curve_family_replay.csv", "reason": "Curve-family replay covering fixed, goodput, workload-label, old-curve, and working-set baselines."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/innovation_t8_threshold_sweep.csv", "reason": "Synthetic T8/C1 threshold sweep identifying the multi-action gate."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/innovation_decision_matrix.csv", "reason": "Machine-readable A-level mechanism decision matrix."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/innovation_search.md", "reason": "Human-readable 3-5 candidate mechanism search with threats, falsifiers, and discriminating results."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/a_level_go_nogo.md", "reason": "Final A-level Go/No-Go and pivot recommendation for this round."}

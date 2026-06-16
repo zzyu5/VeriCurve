@@ -29,16 +29,20 @@ Use precise language:
 
 Do not present a planned kernel or controller as already validated.
 
-## Current Claim Boundary: Claude Critique Resolution
+## Current Claim Boundary: A-Level Search After Claude Critique
 
 As of task `.trellis/tasks/06-16-real-online-controller-validation`, the safe
-paper version is:
+Version B framing is only a conservative fallback boundary:
 
 ```text
 Version B: curve-shaping systems paper
 ```
 
-Allowed current claim:
+It is not a current instruction to write the paper. The A-level innovation
+search found no mechanism-level candidate that passes all gates from current
+evidence.
+
+Allowed current fallback claim:
 
 ```text
 RTile x TTile RVV verification reshapes C_verify(T), and the shaped curve
@@ -61,3 +65,23 @@ Avoid current overclaims:
   meaningful margin; current advantage is about `0.91%`, so this is a tie.
 - Do not claim broad model/quant robustness; rows=2048 shaped T4/T1 degraded
   to about `2.839`, and no cross-quant shaped case has been measured.
+
+Current A-level decision:
+
+```text
+A-level candidate found? NO
+```
+
+The closest candidate is verifier-plan synthesis, but current measured or
+composed plans do not make multi-point speculation valuable:
+
+```text
+current C8/C1 = 3.454508
+two-T4 composed C8/C1 = 2.798736
+max C8/C1 with multi-action gain >= 5% = 2.1
+```
+
+Do not promote VeriCurve-RV beyond the fallback curve-shaping boundary unless a
+real native/composed RVV T8 verifier plan reaches about `C8/C1 <= 2.1`, beats
+goodput/fixed-d killer baselines, and survives at least one robustness setting
+such as rows=2048 or an alternate realistic quant/path.

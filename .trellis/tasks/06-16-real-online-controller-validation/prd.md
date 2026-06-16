@@ -13,7 +13,7 @@ behavior and an online EWMA decision policy can promote the controller from
 Current critique-resolution update:
 
 ```text
-Final paper version: B. Curve-shaping systems paper
+Conservative fallback boundary: B. Curve-shaping systems paper
 Curve-shaping beyond kernel speedup: GO
 Two-action vs multi-point controller: TWO-ACTION
 Selected-only controller: CONDITIONAL
@@ -22,9 +22,24 @@ Robustness: SCOPED
 ```
 
 The paper should not currently be framed as a strong controller-algorithm
-paper. The safe mainline is verifier cost-curve shaping plus policy-regime
-shift, with a simple selected-only `{d=0,d=3}` curve-gated policy as conditional
+paper. It should also not be written yet as Version B. The safe mainline is a
+fallback boundary only: verifier cost-curve shaping plus policy-regime shift,
+with a simple selected-only `{d=0,d=3}` curve-gated policy as conditional
 support.
+
+Current A-level innovation update:
+
+```text
+A-level candidate found? NO
+closest candidate: verifier-plan synthesis
+decisive next gate: native/composed RVV T8 with C8/C1 <= 2.1
+current C8/C1: 3.454508
+two-T4 composed C8/C1: 2.798736
+```
+
+Do not optimize only R8T4, write Version B, or claim an adaptive-controller
+paper unless the T8 verifier-plan synthesis gate changes the action set and
+beats fixed/goodput killer baselines.
 
 ## Inherited State
 
@@ -265,6 +280,12 @@ results/final_decision_matrix.csv
 research/claude_critique_resolution_final.md
 results/remote_claude_critique/rtile_ttile_rows128_r3.csv
 results/remote_claude_critique/rtile_ttile_rows2048_r3.csv
+scripts/search_a_level_mechanisms.py
+results/innovation_curve_family_replay.csv
+results/innovation_t8_threshold_sweep.csv
+results/innovation_decision_matrix.csv
+research/innovation_search.md
+research/a_level_go_nogo.md
 ```
 
 If a full artifact cannot be produced safely in this task, create the best

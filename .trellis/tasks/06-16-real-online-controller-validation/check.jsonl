@@ -10,3 +10,6 @@
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/replay_correctness_audit.md", "reason": "Check selected-only claims are blocked when trace coverage is insufficient."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/commit_aware_replay.md", "reason": "Check pro7 selected-only replay claims and remaining full-system blockers."}
 {"file": ".trellis/spec/project/paper-claims.md", "reason": "Spec updated with current paper claim boundary."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/innovation_decision_matrix.csv", "reason": "Check final A-level decisions against machine-readable candidate matrix."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/innovation_search.md", "reason": "Check candidate mechanisms, threats, falsifiers, and baseline coverage."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/a_level_go_nogo.md", "reason": "Check final A-level No-Go and pivot recommendation."}

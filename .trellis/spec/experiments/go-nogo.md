@@ -251,7 +251,7 @@ B. Two-action vs multi-point controller: TWO-ACTION
 C. Selected-only controller: CONDITIONAL
 D. Goodput-only comparison: TIE
 E. Robustness across model/quant/working-set: SCOPED
-Final paper version: B. Curve-shaping systems paper
+Conservative fallback boundary: Version B. Curve-shaping systems paper
 ```
 
 The regime-shift gate is the main positive systems evidence:
@@ -280,6 +280,62 @@ one of the following is true:
   by `>=5%`;
 - a real runtime `choose_d()` loop measures controller overhead below `1%`;
 - a realistic larger-layer or alternate-quant shaped curve keeps `T4/T1 <= 1.8`.
+
+## Current A-Level Innovation Search Decision
+
+Task:
+
+```text
+.trellis/tasks/06-16-real-online-controller-validation
+```
+
+Required artifacts:
+
+```text
+research/innovation_search.md
+results/innovation_decision_matrix.csv
+research/a_level_go_nogo.md
+```
+
+Decision:
+
+```text
+A-level candidate found? NO
+```
+
+This supersedes treating Version B as the next writing step. Version B remains
+only a scoped fallback result. The current project should stay in research
+discovery mode until the decisive verifier-plan synthesis gate passes or fails.
+
+Candidate results:
+
+```text
+C1 verifier-plan synthesis: FAIL_CURRENT_EVIDENCE
+C2 policy-regime phase model: PROMISING_EXPLANATION_NOT_A_LEVEL
+C3 working-set-aware curve family: FAIL_CURRENT_EVIDENCE
+C4 selected-only curve controller: FAIL_CURRENT_EVIDENCE
+C5 verifier-curve ABI/profile interface: NOT INDEPENDENTLY PASSED
+```
+
+Key threshold:
+
+```text
+current C8/C1 = 3.454508
+two-T4 composed C8/C1 = 2.798736
+max C8/C1 with multi-action oracle gain >= 5% = 2.1
+```
+
+Next Go/No-Go gate:
+
+```text
+GO to A-level mechanism only if a real native/composed RVV T8 verifier plan
+reaches C8/C1 <= 2.1, causes multi-point actions to matter, beats fixed d=3 /
+goodput-only / best-fixed-per-workload killer baselines, and does not collapse
+on rows2048 or an alternate realistic quant/path.
+
+NO-GO / pivot if T8 cannot reach C8/C1 <= 2.1, or if it reaches that threshold
+but goodput-only still matches the plan-aware policy.
+```
 
 Current post-Experiment-1 labels may be more specific:
 

@@ -460,3 +460,44 @@ two-action threshold control beats fixed d=3 by about 11.4%
 strict full-system gate remains open because oracle reach is below 90% and no
 runtime choose_d loop has been measured
 ```
+
+## Current A-Level Controller Boundary
+
+Task:
+
+```text
+.trellis/tasks/06-16-real-online-controller-validation
+```
+
+The A-level innovation search keeps the controller contribution in a negative
+or supporting role:
+
+```text
+selected-only curve-aware: 9.078115 ms/token
+best goodput-only selected: 9.160689 ms/token
+curve-aware advantage: 0.909599%
+oracle reach: 0.891164
+multi-action gain over {d0,d3}: 0.0%
+```
+
+Current controller claim:
+
+```text
+The selected-only curve-aware policy is useful evidence that shaped C_verify(T)
+changes viable speculation regimes, but it is not a strong standalone adaptive
+controller result.
+```
+
+Do not claim an A-level controller mechanism unless curve-aware selection beats
+goodput-only by at least `5%`, reaches at least `90%` oracle, and produces a
+meaningful action set beyond the current `{d=0,d=3}` collapse.
+
+The next controller-relevant gate is not another threshold tweak. It is a
+verifier-plan synthesis gate:
+
+```text
+native/composed RVV T8 with C8/C1 <= 2.1
+```
+
+Without that T8 gate, d7 remains structurally unattractive and controller
+experiments mostly compare two-action policies against goodput-only feedback.
