@@ -49,3 +49,35 @@ Safe for isolated read-only audit, single-target -j1 builds, and short
 low-priority llama.cpp runs. Do not run high-parallel builds or long model
 sweeps.
 ```
+
+## pro7 Update
+
+Timestamp:
+
+```text
+Tue Jun 16 12:16:26 UTC 2026
+```
+
+Load and memory before pro7 remote work:
+
+```text
+load average: 0.27, 0.06, 0.02
+64 CPUs
+121 GiB RAM, 119 GiB available
+```
+
+Build/run limits used:
+
+```text
+single target: llama-lookup-stats
+build: nice -n 10 timeout 600 ... -- -j1
+runs: nice -n 10 timeout 120
+threads: -t 1
+context/batch: -c 64 -b 64 -ub 64
+```
+
+Residual process check after pro7:
+
+```text
+No llama/build process matched except the pgrep command itself.
+```

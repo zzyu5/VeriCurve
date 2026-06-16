@@ -373,3 +373,28 @@ mixed d=3 missing next-position transitions: 0
 selected_threshold_t0.4 scan-mode: 8.968 ms/token, 85.5% oracle
 selected-only commit-aware claim: blocked by trace coverage
 ```
+
+Current pro7 replay snapshot:
+
+```text
+task: .trellis/tasks/06-16-real-online-controller-validation
+
+prefix-state equivalence: GO
+position-complete candidate rows: 10200
+position-complete positions: 2550
+commit-aware replay missing transitions: 0
+
+fixed d=3: 10.248 ms/token
+best selected-only {0,3} threshold: 9.082 ms/token
+commit-aware oracle: 8.090 ms/token
+oracle reach: 89.1%
+```
+
+Interpretation:
+
+```text
+selected-only replay is no longer blocked by trace coverage
+two-action threshold control beats fixed d=3 by about 11.4%
+strict full-system gate remains open because oracle reach is below 90% and no
+runtime choose_d loop has been measured
+```

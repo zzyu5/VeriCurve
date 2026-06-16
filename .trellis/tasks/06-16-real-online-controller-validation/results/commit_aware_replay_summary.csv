@@ -1,0 +1,22 @@
+scope,policy,policy_class,observability,arms,ms_per_token,relative_to_fixed_d3,oracle_reach,total_cost_ms,total_tokens,steps_evaluated,choices,missing_transitions,terminal_transitions,chunks_started,completed_chunks,parameters,notes
+mixed,oracle,fixed,fixed,d0,8.090088,0.789417,1.0,20670.174,2555,1556,d0=1148;d3=408,0,10,10,10,d=0,commit-aware Dinkelbach path oracle
+mixed,fixed_d0,fixed,fixed,d0,12.024267,1.173308,0.672813,30661.88,2550,2550,d0=2550,0,10,10,10,d=0,commit-aware replay
+mixed,fixed_d1,fixed,fixed,d1,17.654743,1.72272,0.458239,45072.56,2553,1875,d1=1875,0,10,10,10,d=1,commit-aware replay
+mixed,fixed_d3,fixed,fixed,d3,10.248179,1.0,0.789417,26184.098,2555,1556,d3=1556,0,10,10,10,d=3,commit-aware replay
+mixed,fixed_d7,fixed,fixed,d7,23.142378,2.258194,0.349579,59151.918,2556,1424,d7=1424,0,10,10,10,d=7,commit-aware replay
+mixed,workload_label_chat0_else3,workload_label_upper_bound,workload_label,"d0,d3",9.155243,0.893353,0.883656,23391.646,2555,1754,d0=1275;d3=479,0,10,10,10,chat/chat_low->d0;code/rag/structured->d3,commit-aware replay
+mixed,goodput_only,goodput_only,full_candidate_info,"d0,d1,d3,d7",23.142378,2.258194,0.349579,59151.918,2556,1424,d7=1424,0,10,10,10,choose max emitted tokens; tie high d,commit-aware replay
+mixed,selected_threshold_t0.3_p8,selected_only_threshold,selected_only,"d0,d3",9.211446,0.898837,0.878265,23535.245,2555,1716,d0=1112;d3=604,0,10,10,10,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.3_p16,selected_only_threshold,selected_only,"d0,d3",9.100663,0.888027,0.888956,23252.193,2555,1740,d0=1255;d3=485,0,10,10,10,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.4_p8,selected_only_threshold,selected_only,"d0,d3",9.204945,0.898203,0.878885,23518.634,2555,1729,d0=1161;d3=568,0,10,10,10,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.4_p16,selected_only_threshold,selected_only,"d0,d3",9.081874,0.886194,0.890795,23204.189,2555,1742,d0=1272;d3=470,0,10,10,10,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.5_p8,selected_only_threshold,selected_only,"d0,d3",9.203111,0.898024,0.87906,23513.949,2555,1737,d0=1190;d3=547,0,10,10,10,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.5_p16,selected_only_threshold,selected_only,"d0,d3",9.117668,0.889687,0.887298,23295.642,2555,1754,d0=1295;d3=459,0,10,10,10,threshold=0.5;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.6_p8,selected_only_threshold,selected_only,"d0,d3",9.237959,0.901424,0.875744,23602.984,2555,1748,d0=1210;d3=538,0,10,10,10,threshold=0.6;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.6_p16,selected_only_threshold,selected_only,"d0,d3",9.147831,0.89263,0.884372,23372.708,2555,1768,d0=1328;d3=440,0,10,10,10,threshold=0.6;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.8_p8,selected_only_threshold,selected_only,"d0,d3",9.241766,0.901796,0.875383,23612.712,2555,1756,d0=1236;d3=520,0,10,10,10,threshold=0.8;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+mixed,selected_threshold_t0.8_p16,selected_only_threshold,selected_only,"d0,d3",9.185517,0.896307,0.880744,23468.996,2555,1782,d0=1357;d3=425,0,10,10,10,threshold=0.8;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+mixed,selected_threshold_t1.0_p8,selected_only_threshold,selected_only,"d0,d3",9.2804,0.905566,0.871739,23711.423,2555,1771,d0=1268;d3=503,0,10,10,10,threshold=1.0;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+mixed,selected_threshold_t1.0_p16,selected_only_threshold,selected_only,"d0,d3",9.363471,0.913672,0.864005,23923.669,2555,1831,d0=1434;d3=397,0,10,10,10,threshold=1.0;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+mixed,best_fixed_mixed,fixed_upper_bound,fixed,d3,10.248179,1.0,0.789417,26184.098,2555,1556,d3=1556,0,10,10,10,d=3,same as fixed_d3
+mixed,best_fixed_per_workload,fixed,fixed,d0,9.155243,0.893353,0.883656,23391.646,2555,1754,d0=1275;d3=479,0,10,10,10,d=0,oracle workload label for fixed d

@@ -1,0 +1,6 @@
+workload,rows,positions,chunks,incomplete_positions,decision
+chat,2040,510,2,0,GO
+chat_low,3060,765,3,0,GO
+code,2040,510,2,0,GO
+rag,2040,510,2,0,GO
+structured,1020,255,1,0,GO

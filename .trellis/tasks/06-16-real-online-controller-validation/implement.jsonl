@@ -2,6 +2,7 @@
 {"file": "doc/pro4.md", "reason": "User-provided next-round analysis and task instructions."}
 {"file": "doc/pro5.md", "reason": "User-provided aligned candidate trace guidance and replay correction."}
 {"file": "doc/pro6.md", "reason": "User-provided selected-only, commit-aware replay and train/test guidance."}
+{"file": "doc/pro7.md", "reason": "User-provided position-complete trace and selected-only two-action replay guidance."}
 {"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/research/controller_go_nogo.md", "reason": "Inherited conditional controller result and baseline values."}
 {"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/results/controller_go_nogo.csv", "reason": "Inherited controller baseline table for comparison."}
 {"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/results/C_verify_best_curve.csv", "reason": "Verifier curve table feeding real controller/replay scoring."}
@@ -15,3 +16,4 @@
 {"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Shared rvv safety protocol."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/replay_correctness_audit.md", "reason": "Current pro6 finding: scan-mode replay is not selected-path commit-aware."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/policy_family_replay.md", "reason": "Current policy-family results and trace coverage blocker."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/commit_aware_replay.md", "reason": "Current pro7 commit-aware selected-only replay result and Go/No-Go status."}

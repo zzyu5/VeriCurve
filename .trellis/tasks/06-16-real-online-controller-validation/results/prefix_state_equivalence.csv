@@ -1,0 +1,6 @@
+workload,rows,chunks,min_position,max_position,pseudo_mismatch,context_mismatch,candidate_d0_mismatch,candidate_d1_mismatch,candidate_d3_mismatch,candidate_d7_mismatch,decision
+chat,424,2,2,256,0,0,0,0,0,0,GO
+chat_low,653,3,2,256,0,0,0,0,0,0,GO
+code,167,2,2,256,0,0,0,0,0,0,GO
+rag,191,2,2,256,0,0,0,0,0,0,GO
+structured,121,1,2,256,0,0,0,0,0,0,GO

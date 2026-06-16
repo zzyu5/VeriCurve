@@ -15,7 +15,7 @@ results/policy_train_test.csv
 ```text
 FULL SYSTEM GO: no
 Current status: CONDITIONAL
-Online controller: BLOCKED_BY_TRACE_COVERAGE
+Online controller: commit-aware replay CONDITIONAL; runtime NOT DONE
 ```
 
 ## What Passed
@@ -80,20 +80,49 @@ best train-ranked threshold policy:
   test oracle reach:          85.5%
 ```
 
+## pro7 Update
+
+The trace coverage blocker is resolved for replay:
+
+```text
+prefix-state equivalence: GO
+position-complete candidate trace: GO
+commit-aware replay missing transitions: 0
+```
+
+Best commit-aware selected-only policy:
+
+```text
+selected_threshold_t0.4_p16:
+  9.082 ms/token
+  0.886x fixed d=3
+  89.1% oracle reach
+```
+
+Updated online-controller state:
+
+```text
+selected-only replay: CONDITIONAL / NEAR-GO
+runtime choose_d: NOT DONE
+FULL SYSTEM GO: NO
+```
+
 ## What Failed or Remains Missing
 
-The previous aligned replay is not commit-aware:
+The previous aligned replay was not commit-aware:
 
 ```text
 it scans recorded d=3-trajectory positions
 it does not jump by 1 + accepted_count(selected_d)
 ```
 
-The current aligned trace is not position-complete for non-d3 selected paths:
+That issue is now fixed by the position-complete trace, but the full controller
+gate still does not pass:
 
 ```text
-mixed d=0 missing next-position transitions: 402
-mixed d=1 missing next-position transitions: 318
+oracle reach is 89.1%, below 90%
+no runtime choose_d loop has been measured
+controller overhead is bounded only in replay, not in runtime
 ```
 
 Therefore:
@@ -111,14 +140,15 @@ no selected-only online controller has been proven
 aligned candidate trace: GO
 workload-dependent policy opportunity: GO
 fixed d=3 close to oracle: NO
-selected-only controller: NOT PROVEN
+selected-only commit-aware replay: CONDITIONAL / NEAR-GO
+runtime controller: NOT DONE
 full system: NO
 ```
 
 The next decisive step is not more scan-mode tuning. It is one of:
 
 ```text
-1. collect a position-complete aligned trace, likely by committing d=0 and
-   evaluating d in {0,1,3,7} at every position, or
-2. run a real runtime choose_d policy and log selected decisions directly.
+1. run a real runtime choose_d policy and log selected decisions directly, or
+2. do a narrow commit-aware replay tuning pass to close the 89.1% -> 90%
+   oracle gap before runtime integration.
 ```

@@ -1,0 +1,76 @@
+--- a/examples/lookup/lookup-stats.cpp
++++ b/examples/lookup/lookup-stats.cpp
+@@ -204,6 +204,18 @@
+                 "chunk_id,position,d3_step_id,d3_round_accept,d0_pseudo_hash,d3_pseudo_hash,d0_recent_hash,d3_recent_hash,d0_context_hash,d3_context_hash,d0_context_ngrams,d3_context_ngrams,d0_context_edges,d3_context_edges,d0_context_count_sum,d3_context_count_sum,pseudo_equal,context_equal,candidate_match_d0,candidate_match_d1,candidate_match_d3,candidate_match_d7\n");
+     }
+ 
++    FILE * vc_position_complete = nullptr;
++    const char * vc_position_complete_path = std::getenv("VERICURVE_LOOKUP_POSITION_COMPLETE_CSV");
++    if (vc_position_complete_path && vc_position_complete_path[0]) {
++        vc_position_complete = std::fopen(vc_position_complete_path, "w");
++        if (!vc_position_complete) {
++            LOG_ERR("failed to open VERICURVE_LOOKUP_POSITION_COMPLETE_CSV: %s\n", vc_position_complete_path);
++            return 1;
++        }
++        std::fprintf(vc_position_complete,
++                "chunk_id,position,candidate_d,drafted_count,accepted_count,target_available,pseudo_state_hash,recent_tokens_hash,context_hash,context_ngrams,context_edges,context_count_sum,draft_update_us\n");
++    }
++
+     // Iterate over input tokens in chunks of size n_ctx.
+     // Each chunk is treated as if a sequential generation but with pre-determined tokens to ensure reproducibility.
+     for (int i_start = 0; i_start + n_ctx < n_input; i_start += n_ctx) {
+@@ -214,6 +226,44 @@
+         common_ngram_cache ngram_cache_context_d0;
+         if (vc_state_eq) {
+             pseudo_output_d0.push_back(inp_slice[0]);
++        }
++
++        if (vc_position_complete) {
++            std::vector<llama_token> pc_pseudo;
++            common_ngram_cache pc_context;
++            pc_pseudo.push_back(inp_slice[0]);
++            while ((int) pc_pseudo.size() < n_ctx) {
++                const int pc_position = pc_pseudo.size();
++                const vc_cache_stats pc_cache = vc_hash_ngram_cache(pc_context);
++                const uint64_t pc_pseudo_hash = vc_hash_tokens(pc_pseudo, 0);
++                const uint64_t pc_recent_hash = vc_hash_tokens(pc_pseudo, 16);
++                const int candidate_ds[] = {0, 1, 3, 7};
++                for (int candidate_d : candidate_ds) {
++                    int candidate_drafted = 0;
++                    int candidate_accept = 0;
++                    uint64_t candidate_hash = 0;
++                    const int64_t t_start_candidate_us = ggml_time_us();
++                    vc_candidate_signature(pc_pseudo, inp_slice, candidate_d, pc_context, ngram_cache_dynamic, ngram_cache_static, candidate_drafted, candidate_accept, candidate_hash);
++                    const int64_t candidate_us = ggml_time_us() - t_start_candidate_us;
++                    std::fprintf(vc_position_complete,
++                            "%d,%d,%d,%d,%d,%d,%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64 ",%zu,%zu,%" PRId64 ",%" PRId64 "\n",
++                            i_start / n_ctx,
++                            pc_position,
++                            candidate_d,
++                            candidate_drafted,
++                            candidate_accept,
++                            n_ctx - pc_position,
++                            pc_pseudo_hash,
++                            pc_recent_hash,
++                            pc_cache.hash,
++                            pc_cache.ngrams,
++                            pc_cache.edges,
++                            pc_cache.count_sum,
++                            candidate_us);
++                }
++                pc_pseudo.push_back(inp_slice[pc_pseudo.size()]);
++                common_ngram_cache_update(pc_context, LLAMA_NGRAM_MIN, LLAMA_NGRAM_MAX, pc_pseudo, 1, false);
++            }
+         }
+ 
+         int step_id = 0;
+@@ -396,6 +446,9 @@
+     if (vc_state_eq) {
+         std::fclose(vc_state_eq);
+     }
++    if (vc_position_complete) {
++        std::fclose(vc_position_complete);
++    }
+ 
+     llama_backend_free();
+ 

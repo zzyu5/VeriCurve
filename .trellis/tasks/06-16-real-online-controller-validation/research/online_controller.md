@@ -54,17 +54,19 @@ all candidate EWMAs from the aligned trace after each step.
 
 ## What Is Missing
 
-A real online EWMA controller is not implemented yet.
+A real runtime online controller is not implemented yet.
 
 The next implementation needs one of:
 
 ```text
-1. a selected-only replay policy with explicit exploration, or
-2. a real runtime loop that chooses d online and records each decision.
+1. a real runtime loop that chooses d online and records each decision, or
+2. a narrow tuning pass over the position-complete replay to close the last
+   oracle gap before runtime integration.
 ```
 
-The current aligned replay can score oracle and upper-bound EWMA, but it is not
-yet deployable online-controller evidence.
+The current position-complete replay can score selected-only policies with true
+commit semantics, but it is still replay evidence rather than runtime
+`choose_d()` evidence.
 
 ## pro6 Replay Semantics Audit
 
@@ -83,8 +85,8 @@ mixed d=0 missing next-position transitions: 402
 mixed d=1 missing next-position transitions: 318
 ```
 
-Therefore current selected-only controller evidence is blocked by trace
-coverage. Scan-mode selected policies are promising but not final:
+Therefore the pro6 selected-only controller evidence was blocked by trace
+coverage. Scan-mode selected policies were promising but not final:
 
 ```text
 selected threshold t=0.4 scan-mode: 8.968 ms/token
@@ -98,24 +100,53 @@ Commit-aware replay over the available trace marks non-d3 policies as:
 insufficient_trace_coverage_for_selected_path
 ```
 
+## pro7 Position-Complete Replay
+
+The pro7 follow-up resolved the replay coverage blocker:
+
+```text
+prefix-state equivalence: GO
+position-complete candidate trace: GO
+commit-aware replay missing transitions: 0
+```
+
+Best selected-only two-action policy:
+
+```text
+selected_threshold_t0.4_p16:
+  arms: d in {0,3}
+  ms/token: 9.082
+  relative to fixed d=3: 0.886
+  oracle reach: 89.1%
+```
+
+Low-acceptance regression against no-spec:
+
+```text
+chat:     +1.6%
+chat_low: -0.1%
+```
+
 ## Current Controller Implication
 
 The result is not full-system go:
 
 ```text
 EWMA full-info replay reaches only 84.9% oracle
-no selected-only choose_d loop
+selected-only commit-aware replay reaches 89.1% oracle, below 90%
 no real target-decode online controller
-non-d3 selected paths fall off the current d=3 committed aligned trace
+no runtime choose_d loop
 ```
 
 ## Decision
 
 ```text
 Aligned replay: CONDITIONAL GO
-Online controller: BLOCKED_BY_TRACE_COVERAGE
+Selected-only commit-aware replay: CONDITIONAL / NEAR-GO
+Runtime online controller: NOT DONE
 Current status: CONDITIONAL, not FULL SYSTEM GO
 ```
 
-The next implementation step should be a position-complete aligned trace or a
-small runtime `choose_d()` experiment, not further kernel tuning.
+The next implementation step should be either a small runtime `choose_d()`
+experiment for the `{0,3}` threshold policy or a narrow replay tuning pass to
+close the final oracle gap. It should not be further kernel tuning.

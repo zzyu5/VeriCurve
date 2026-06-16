@@ -214,6 +214,24 @@ results/policy_family_replay.csv
 research/policy_family_replay.md
 results/policy_train_test.csv
 research/policy_train_test.md
+research/pro7_guidance_summary.md
+patches/pseudo_state_hash.patch
+scripts/make_pseudo_state_hash_patch.py
+results/prefix_state_equivalence.csv
+research/prefix_state_equivalence.md
+patches/position_complete_trace.patch
+scripts/make_position_complete_trace_patch.py
+results/position_complete_candidate_trace.csv
+results/position_complete_trace_quality.csv
+research/position_complete_candidate_trace.md
+scripts/replay_commit_aware.py
+results/commit_aware_replay_summary.csv
+results/commit_aware_replay_by_workload.csv
+results/commit_aware_selected_threshold_trace.csv
+research/commit_aware_replay.md
+research/two_action_policy_replay.md
+results/commit_aware_train_test.csv
+research/commit_aware_train_test.md
 ```
 
 If a full artifact cannot be produced safely in this task, create the best

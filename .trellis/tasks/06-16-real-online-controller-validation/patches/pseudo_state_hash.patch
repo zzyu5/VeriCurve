@@ -1,0 +1,206 @@
+--- a/examples/lookup/lookup-stats.cpp
++++ b/examples/lookup/lookup-stats.cpp
+@@ -5,6 +5,8 @@
+ #include "llama.h"
+ #include "ggml.h"
+ 
++#include <algorithm>
++#include <array>
+ #include <cinttypes>
+ #include <clocale>
+ #include <cstdint>
+@@ -12,7 +14,97 @@
+ #include <cstdlib>
+ #include <fstream>
+ #include <string>
++#include <tuple>
+ #include <vector>
++
++static uint64_t vc_mix_u64(uint64_t h, uint64_t v) {
++    return h ^ (v + 0x9e3779b97f4a7c15ULL + (h << 6) + (h >> 2));
++}
++
++static uint64_t vc_hash_i64(int64_t v) {
++    return static_cast<uint64_t>(v) ^ 0x9e3779b97f4a7c15ULL;
++}
++
++static uint64_t vc_hash_tokens(const std::vector<llama_token> & tokens, size_t suffix_len) {
++    const size_t start = suffix_len > 0 && tokens.size() > suffix_len ? tokens.size() - suffix_len : 0;
++    uint64_t h = 1469598103934665603ULL;
++    h = vc_mix_u64(h, tokens.size());
++    for (size_t i = start; i < tokens.size(); ++i) {
++        h = vc_mix_u64(h, vc_hash_i64(tokens[i]));
++    }
++    return h;
++}
++
++struct vc_cache_stats {
++    uint64_t hash;
++    size_t ngrams;
++    size_t edges;
++    int64_t count_sum;
++};
++
++static vc_cache_stats vc_hash_ngram_cache(const common_ngram_cache & cache) {
++    std::vector<std::array<int64_t, LLAMA_NGRAM_MAX + 2>> entries;
++    entries.reserve(cache.size());
++    int64_t count_sum = 0;
++    for (const auto & item : cache) {
++        const common_ngram & ngram = item.first;
++        for (const auto & token_count : item.second) {
++            std::array<int64_t, LLAMA_NGRAM_MAX + 2> entry{};
++            for (int i = 0; i < LLAMA_NGRAM_MAX; ++i) {
++                entry[i] = ngram.tokens[i];
++            }
++            entry[LLAMA_NGRAM_MAX] = token_count.first;
++            entry[LLAMA_NGRAM_MAX + 1] = token_count.second;
++            count_sum += token_count.second;
++            entries.push_back(entry);
++        }
++    }
++    std::sort(entries.begin(), entries.end());
++    uint64_t h = 1469598103934665603ULL;
++    h = vc_mix_u64(h, cache.size());
++    h = vc_mix_u64(h, entries.size());
++    h = vc_mix_u64(h, vc_hash_i64(count_sum));
++    for (const auto & entry : entries) {
++        for (int64_t v : entry) {
++            h = vc_mix_u64(h, vc_hash_i64(v));
++        }
++    }
++    return { h, cache.size(), entries.size(), count_sum };
++}
++
++static int vc_count_accept(
++        const std::vector<llama_token> & target,
++        int position,
++        const std::vector<llama_token> & draft) {
++    int accepted = 0;
++    for (size_t j = 1; j < draft.size() && position + accepted < (int) target.size(); ++j) {
++        if (target[position + accepted] != draft[j]) {
++            break;
++        }
++        ++accepted;
++    }
++    return accepted;
++}
++
++static void vc_candidate_signature(
++        std::vector<llama_token> & pseudo,
++        const std::vector<llama_token> & target,
++        int candidate_d,
++        common_ngram_cache & nc_context,
++        common_ngram_cache & nc_dynamic,
++        common_ngram_cache & nc_static,
++        int & drafted,
++        int & accepted,
++        uint64_t & draft_hash) {
++    std::vector<llama_token> draft;
++    draft.push_back(pseudo.back());
++    if (candidate_d > 0) {
++        common_ngram_cache_draft(pseudo, draft, candidate_d, LLAMA_NGRAM_MIN, LLAMA_NGRAM_MAX, nc_context, nc_dynamic, nc_static);
++    }
++    drafted = draft.size() > 0 ? draft.size() - 1 : 0;
++    accepted = vc_count_accept(target, pseudo.size(), draft);
++    draft_hash = vc_hash_tokens(draft, 0);
++}
+ 
+ int main(int argc, char ** argv){
+     std::setlocale(LC_NUMERIC, "C");
+@@ -100,12 +192,29 @@
+                 "chunk_id,step_id,pseudo_position,candidate_d,drafted_count,accepted_count,target_available,trace_draft_us\n");
+     }
+ 
++    FILE * vc_state_eq = nullptr;
++    const char * vc_state_eq_path = std::getenv("VERICURVE_LOOKUP_STATE_EQ_CSV");
++    if (vc_state_eq_path && vc_state_eq_path[0]) {
++        vc_state_eq = std::fopen(vc_state_eq_path, "w");
++        if (!vc_state_eq) {
++            LOG_ERR("failed to open VERICURVE_LOOKUP_STATE_EQ_CSV: %s\n", vc_state_eq_path);
++            return 1;
++        }
++        std::fprintf(vc_state_eq,
++                "chunk_id,position,d3_step_id,d3_round_accept,d0_pseudo_hash,d3_pseudo_hash,d0_recent_hash,d3_recent_hash,d0_context_hash,d3_context_hash,d0_context_ngrams,d3_context_ngrams,d0_context_edges,d3_context_edges,d0_context_count_sum,d3_context_count_sum,pseudo_equal,context_equal,candidate_match_d0,candidate_match_d1,candidate_match_d3,candidate_match_d7\n");
++    }
++
+     // Iterate over input tokens in chunks of size n_ctx.
+     // Each chunk is treated as if a sequential generation but with pre-determined tokens to ensure reproducibility.
+     for (int i_start = 0; i_start + n_ctx < n_input; i_start += n_ctx) {
+         const std::vector<llama_token> inp_slice(inp.begin() + i_start, inp.begin() + i_start + n_ctx);
+         std::vector<llama_token> pseudo_output;
+         pseudo_output.push_back(inp_slice[0]);
++        std::vector<llama_token> pseudo_output_d0;
++        common_ngram_cache ngram_cache_context_d0;
++        if (vc_state_eq) {
++            pseudo_output_d0.push_back(inp_slice[0]);
++        }
+ 
+         int step_id = 0;
+         while ((int) pseudo_output.size() < n_ctx) {
+@@ -197,6 +306,56 @@
+                         pseudo_output.size(),
+                         t_draft_us - trace_t_before_us);
+             }
++            if (vc_state_eq) {
++                while (pseudo_output_d0.size() < pseudo_output.size()) {
++                    pseudo_output_d0.push_back(inp_slice[pseudo_output_d0.size()]);
++                    common_ngram_cache_update(ngram_cache_context_d0, LLAMA_NGRAM_MIN, LLAMA_NGRAM_MAX, pseudo_output_d0, 1, false);
++                }
++                const vc_cache_stats d0_cache = vc_hash_ngram_cache(ngram_cache_context_d0);
++                const vc_cache_stats d3_cache = vc_hash_ngram_cache(ngram_cache_context);
++                const uint64_t d0_pseudo_hash = vc_hash_tokens(pseudo_output_d0, 0);
++                const uint64_t d3_pseudo_hash = vc_hash_tokens(pseudo_output, 0);
++                const uint64_t d0_recent_hash = vc_hash_tokens(pseudo_output_d0, 16);
++                const uint64_t d3_recent_hash = vc_hash_tokens(pseudo_output, 16);
++                int candidate_match[4] = {0, 0, 0, 0};
++                const int candidate_ds[] = {0, 1, 3, 7};
++                for (int ci = 0; ci < 4; ++ci) {
++                    const int candidate_d = candidate_ds[ci];
++                    int d0_drafted = 0;
++                    int d0_accept = 0;
++                    uint64_t d0_draft_hash = 0;
++                    int d3_drafted = 0;
++                    int d3_accept = 0;
++                    uint64_t d3_draft_hash = 0;
++                    vc_candidate_signature(pseudo_output_d0, inp_slice, candidate_d, ngram_cache_context_d0, ngram_cache_dynamic, ngram_cache_static, d0_drafted, d0_accept, d0_draft_hash);
++                    vc_candidate_signature(pseudo_output, inp_slice, candidate_d, ngram_cache_context, ngram_cache_dynamic, ngram_cache_static, d3_drafted, d3_accept, d3_draft_hash);
++                    candidate_match[ci] = d0_drafted == d3_drafted && d0_accept == d3_accept && d0_draft_hash == d3_draft_hash;
++                }
++                std::fprintf(vc_state_eq,
++                        "%d,%zu,%d,%d,%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64 ",%zu,%zu,%zu,%zu,%" PRId64 ",%" PRId64 ",%d,%d,%d,%d,%d,%d\n",
++                        i_start / n_ctx,
++                        pseudo_output.size(),
++                        step_id,
++                        round_accept,
++                        d0_pseudo_hash,
++                        d3_pseudo_hash,
++                        d0_recent_hash,
++                        d3_recent_hash,
++                        d0_cache.hash,
++                        d3_cache.hash,
++                        d0_cache.ngrams,
++                        d3_cache.ngrams,
++                        d0_cache.edges,
++                        d3_cache.edges,
++                        d0_cache.count_sum,
++                        d3_cache.count_sum,
++                        d0_pseudo_hash == d3_pseudo_hash,
++                        d0_cache.hash == d3_cache.hash,
++                        candidate_match[0],
++                        candidate_match[1],
++                        candidate_match[2],
++                        candidate_match[3]);
++            }
+             ++step_id;
+ 
+             draft.erase(draft.begin());
+@@ -234,6 +393,9 @@
+     if (vc_aligned_trace) {
+         std::fclose(vc_aligned_trace);
+     }
++    if (vc_state_eq) {
++        std::fclose(vc_state_eq);
++    }
+ 
+     llama_backend_free();
+ 

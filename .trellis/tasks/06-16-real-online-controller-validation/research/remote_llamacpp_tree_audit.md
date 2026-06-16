@@ -32,6 +32,8 @@ The `lookup-stats.cpp` dirty change is this task's patch:
 ```text
 VERICURVE_LOOKUP_TRACE_CSV records per-step lookup drafted/accepted counts.
 VERICURVE_LOOKUP_ALIGNED_TRACE_CSV records same-position candidate d=0/1/3/7 counts.
+VERICURVE_LOOKUP_STATE_EQ_CSV records d0-stepwise vs d3-committed pseudo/cache hashes.
+VERICURVE_LOOKUP_POSITION_COMPLETE_CSV records teacher-forced per-position candidates.
 ```
 
 Build directory:
@@ -96,6 +98,17 @@ Safety note:
 ```text
 Do not overwrite or clean the dirty tree. The lookup trace changes are captured
 in patches/llamacpp_acceptance_trace.patch and
-patches/aligned_candidate_trace.patch. Prefer single-target -j1 builds and
-short runs.
+patches/aligned_candidate_trace.patch, with pro7 additions in
+patches/pseudo_state_hash.patch and patches/position_complete_trace.patch.
+Prefer single-target -j1 builds and short runs.
+```
+
+pro7 update:
+
+```text
+lookup-stats.cpp diff stat: 298 insertions
+rebuilt target: llama-lookup-stats
+build command: nice -n 10 timeout 600 cmake --build build-vericurve --target llama-lookup-stats -- -j1
+run command shape: nice -n 10 timeout 120 llama-lookup-stats ... -c 64 -t 1 -b 64 -ub 64 --spec-draft-n-max 3
+residual process check: no llama/build process matched except the pgrep command itself
 ```

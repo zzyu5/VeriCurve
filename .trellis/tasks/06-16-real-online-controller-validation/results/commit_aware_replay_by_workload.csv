@@ -1,0 +1,96 @@
+scope,policy,policy_class,observability,arms,ms_per_token,relative_to_fixed_d3,oracle_reach,total_cost_ms,total_tokens,steps_evaluated,choices,missing_transitions,terminal_transitions,chunks_started,completed_chunks,parameters,notes
+chat,fixed_d0,fixed,fixed,d0,12.024259,0.859479,0.875267,6132.372,510,510,d0=510,0,2,2,2,d=0,commit-aware replay
+chat,fixed_d1,fixed,fixed,d1,21.163647,1.512751,0.497288,10793.46,510,449,d1=449,0,2,2,2,d=1,commit-aware replay
+chat,fixed_d3,fixed,fixed,d3,13.990175,1.0,0.752273,7134.989,510,424,d3=424,0,2,2,2,d=3,commit-aware replay
+chat,fixed_d7,fixed,fixed,d7,34.222947,2.446213,0.307526,17487.926,511,421,d7=421,0,2,2,2,d=7,commit-aware replay
+chat,workload_label_chat0_else3,workload_label_upper_bound,workload_label,"d0,d3",12.024259,0.859479,0.875267,6132.372,510,510,d0=510,0,2,2,2,chat/chat_low->d0;code/rag/structured->d3,commit-aware replay
+chat,goodput_only,goodput_only,full_candidate_info,"d0,d1,d3,d7",34.222947,2.446213,0.307526,17487.926,511,421,d7=421,0,2,2,2,choose max emitted tokens; tie high d,commit-aware replay
+chat,selected_threshold_t0.3_p8,selected_only_threshold,selected_only,"d0,d3",12.409747,0.887033,0.848078,6328.971,510,486,d0=385;d3=101,0,2,2,2,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.3_p16,selected_only_threshold,selected_only,"d0,d3",12.264102,0.876623,0.85815,6254.692,510,499,d0=446;d3=53,0,2,2,2,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.4_p8,selected_only_threshold,selected_only,"d0,d3",12.409976,0.887049,0.848062,6329.088,510,494,d0=413;d3=81,0,2,2,2,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.4_p16,selected_only_threshold,selected_only,"d0,d3",12.21701,0.873256,0.861458,6230.675,510,499,d0=451;d3=48,0,2,2,2,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.5_p8,selected_only_threshold,selected_only,"d0,d3",12.381724,0.88503,0.849998,6314.679,510,494,d0=416;d3=78,0,2,2,2,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.5_p16,selected_only_threshold,selected_only,"d0,d3",12.188757,0.871237,0.863454,6216.266,510,499,d0=454;d3=45,0,2,2,2,threshold=0.5;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.6_p8,selected_only_threshold,selected_only,"d0,d3",12.36289,0.883684,0.851292,6305.074,510,494,d0=418;d3=76,0,2,2,2,threshold=0.6;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.6_p16,selected_only_threshold,selected_only,"d0,d3",12.179339,0.870564,0.864122,6211.463,510,499,d0=455;d3=44,0,2,2,2,threshold=0.6;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.8_p8,selected_only_threshold,selected_only,"d0,d3",12.334641,0.881665,0.853242,6290.667,510,494,d0=421;d3=73,0,2,2,2,threshold=0.8;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat,selected_threshold_t0.8_p16,selected_only_threshold,selected_only,"d0,d3",12.141673,0.867871,0.866803,6192.253,510,499,d0=459;d3=40,0,2,2,2,threshold=0.8;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat,selected_threshold_t1.0_p8,selected_only_threshold,selected_only,"d0,d3",12.306388,0.879645,0.855201,6276.258,510,494,d0=424;d3=70,0,2,2,2,threshold=1.0;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat,selected_threshold_t1.0_p16,selected_only_threshold,selected_only,"d0,d3",12.132257,0.867198,0.867475,6187.451,510,499,d0=460;d3=39,0,2,2,2,threshold=1.0;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat,oracle,fixed,fixed,d0,10.524435,0.752273,1.0,5367.462,510,424,d0=368;d3=56,0,2,2,2,d=0,commit-aware per-workload oracle
+chat_low,fixed_d0,fixed,fixed,d0,12.024281,0.837116,0.884941,9198.575,765,765,d0=765,0,3,3,3,d=0,commit-aware replay
+chat_low,fixed_d1,fixed,fixed,d1,21.525051,1.498548,0.494344,16466.664,765,685,d1=685,0,3,3,3,d=1,commit-aware replay
+chat_low,fixed_d3,fixed,fixed,d3,14.363935,1.0,0.740798,10988.41,765,653,d3=653,0,3,3,3,d=3,commit-aware replay
+chat_low,fixed_d7,fixed,fixed,d7,35.07721,2.442034,0.303353,26834.066,765,646,d7=646,0,3,3,3,d=7,commit-aware replay
+chat_low,workload_label_chat0_else3,workload_label_upper_bound,workload_label,"d0,d3",12.024281,0.837116,0.884941,9198.575,765,765,d0=765,0,3,3,3,chat/chat_low->d0;code/rag/structured->d3,commit-aware replay
+chat_low,goodput_only,goodput_only,full_candidate_info,"d0,d1,d3,d7",35.07721,2.442034,0.303353,26834.066,765,646,d7=646,0,3,3,3,choose max emitted tokens; tie high d,commit-aware replay
+chat_low,selected_threshold_t0.3_p8,selected_only_threshold,selected_only,"d0,d3",12.362646,0.860673,0.86072,9457.424,765,729,d0=585;d3=144,0,3,3,3,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.3_p16,selected_only_threshold,selected_only,"d0,d3",12.061333,0.839696,0.882222,9226.92,765,733,d0=647;d3=86,0,3,3,3,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.4_p8,selected_only_threshold,selected_only,"d0,d3",12.343901,0.859368,0.862027,9443.084,765,733,d0=602;d3=131,0,3,3,3,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.4_p16,selected_only_threshold,selected_only,"d0,d3",12.017383,0.836636,0.885449,9193.298,765,733,d0=654;d3=79,0,3,3,3,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.5_p8,selected_only_threshold,selected_only,"d0,d3",12.362889,0.86069,0.860703,9457.61,765,741,d0=627;d3=114,0,3,3,3,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.5_p16,selected_only_threshold,selected_only,"d0,d3",12.004827,0.835762,0.886375,9183.693,765,733,d0=656;d3=77,0,3,3,3,threshold=0.5;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.6_p8,selected_only_threshold,selected_only,"d0,d3",12.362889,0.86069,0.860703,9457.61,765,741,d0=627;d3=114,0,3,3,3,threshold=0.6;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.6_p16,selected_only_threshold,selected_only,"d0,d3",11.985992,0.83445,0.887768,9169.284,765,733,d0=659;d3=74,0,3,3,3,threshold=0.6;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.8_p8,selected_only_threshold,selected_only,"d0,d3",12.325214,0.858067,0.863334,9428.789,765,741,d0=633;d3=108,0,3,3,3,threshold=0.8;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t0.8_p16,selected_only_threshold,selected_only,"d0,d3",11.973433,0.833576,0.888699,9159.676,765,733,d0=661;d3=72,0,3,3,3,threshold=0.8;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t1.0_p8,selected_only_threshold,selected_only,"d0,d3",12.300102,0.856318,0.865097,9409.578,765,741,d0=637;d3=104,0,3,3,3,threshold=1.0;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+chat_low,selected_threshold_t1.0_p16,selected_only_threshold,selected_only,"d0,d3",12.014331,0.836423,0.885674,9190.963,765,738,d0=672;d3=66,0,3,3,3,threshold=1.0;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+chat_low,oracle,fixed,fixed,d0,10.640775,0.740798,1.0,8140.193,765,653,d0=593;d3=60,0,3,3,3,d=0,commit-aware per-workload oracle
+code,fixed_d0,fixed,fixed,d0,12.024259,2.190644,0.418257,6132.372,510,510,d0=510,0,2,2,2,d=0,commit-aware replay
+code,fixed_d1,fixed,fixed,d1,13.244649,2.412981,0.379718,6754.771,510,281,d1=281,0,2,2,2,d=1,commit-aware replay
+code,fixed_d3,fixed,fixed,d3,5.488916,1.0,0.916252,2810.325,512,167,d3=167,0,2,2,2,d=3,commit-aware replay
+code,fixed_d7,fixed,fixed,d7,8.924721,1.625953,0.563517,4569.457,512,110,d7=110,0,2,2,2,d=7,commit-aware replay
+code,workload_label_chat0_else3,workload_label_upper_bound,workload_label,"d0,d3",5.488916,1.0,0.916252,2810.325,512,167,d3=167,0,2,2,2,chat/chat_low->d0;code/rag/structured->d3,commit-aware replay
+code,goodput_only,goodput_only,full_candidate_info,"d0,d1,d3,d7",8.924721,1.625953,0.563517,4569.457,512,110,d7=110,0,2,2,2,choose max emitted tokens; tie high d,commit-aware replay
+code,selected_threshold_t0.3_p8,selected_only_threshold,selected_only,"d0,d3",5.296744,0.964989,0.949495,2711.933,512,172,d0=38;d3=134,0,2,2,2,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+code,selected_threshold_t0.3_p16,selected_only_threshold,selected_only,"d0,d3",5.268604,0.959862,0.954566,2697.525,512,172,d0=41;d3=131,0,2,2,2,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+code,selected_threshold_t0.4_p8,selected_only_threshold,selected_only,"d0,d3",5.296744,0.964989,0.949495,2711.933,512,172,d0=38;d3=134,0,2,2,2,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+code,selected_threshold_t0.4_p16,selected_only_threshold,selected_only,"d0,d3",5.268604,0.959862,0.954566,2697.525,512,172,d0=41;d3=131,0,2,2,2,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+code,selected_threshold_t0.5_p8,selected_only_threshold,selected_only,"d0,d3",5.296744,0.964989,0.949495,2711.933,512,172,d0=38;d3=134,0,2,2,2,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+code,selected_threshold_t0.5_p16,selected_only_threshold,selected_only,"d0,d3",5.268604,0.959862,0.954566,2697.525,512,172,d0=41;d3=131,0,2,2,2,threshold=0.5;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+code,selected_threshold_t0.6_p8,selected_only_threshold,selected_only,"d0,d3",5.296744,0.964989,0.949495,2711.933,512,172,d0=38;d3=134,0,2,2,2,threshold=0.6;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+code,selected_threshold_t0.6_p16,selected_only_threshold,selected_only,"d0,d3",5.268604,0.959862,0.954566,2697.525,512,172,d0=41;d3=131,0,2,2,2,threshold=0.6;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+code,selected_threshold_t0.8_p8,selected_only_threshold,selected_only,"d0,d3",5.296744,0.964989,0.949495,2711.933,512,172,d0=38;d3=134,0,2,2,2,threshold=0.8;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+code,selected_threshold_t0.8_p16,selected_only_threshold,selected_only,"d0,d3",5.268604,0.959862,0.954566,2697.525,512,172,d0=41;d3=131,0,2,2,2,threshold=0.8;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+code,selected_threshold_t1.0_p8,selected_only_threshold,selected_only,"d0,d3",5.432984,0.98981,0.925685,2781.688,512,179,d0=48;d3=131,0,2,2,2,threshold=1.0;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+code,selected_threshold_t1.0_p16,selected_only_threshold,selected_only,"d0,d3",5.832342,1.062567,0.8623,2986.159,512,200,d0=79;d3=121,0,2,2,2,threshold=1.0;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+code,oracle,fixed,fixed,d0,5.02923,0.916252,1.0,2574.966,512,167,d0=49;d3=118,0,2,2,2,d=0,commit-aware per-workload oracle
+rag,fixed_d0,fixed,fixed,d0,12.024267,1.915391,0.468257,6132.376,510,510,d0=510,0,2,2,2,d=0,commit-aware replay
+rag,fixed_d1,fixed,fixed,d1,13.897209,2.213739,0.405149,7115.371,512,296,d1=296,0,2,2,2,d=1,commit-aware replay
+rag,fixed_d3,fixed,fixed,d3,6.277709,1.0,0.896895,3214.187,512,191,d3=191,0,2,2,2,d=3,commit-aware replay
+rag,fixed_d7,fixed,fixed,d7,11.683266,1.861072,0.481924,5981.832,512,144,d7=144,0,2,2,2,d=7,commit-aware replay
+rag,workload_label_chat0_else3,workload_label_upper_bound,workload_label,"d0,d3",6.277709,1.0,0.896895,3214.187,512,191,d3=191,0,2,2,2,chat/chat_low->d0;code/rag/structured->d3,commit-aware replay
+rag,goodput_only,goodput_only,full_candidate_info,"d0,d1,d3,d7",11.683266,1.861072,0.481924,5981.832,512,144,d7=144,0,2,2,2,choose max emitted tokens; tie high d,commit-aware replay
+rag,selected_threshold_t0.3_p8,selected_only_threshold,selected_only,"d0,d3",6.109182,0.973155,0.921636,3127.901,512,201,d0=53;d3=148,0,2,2,2,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.3_p16,selected_only_threshold,selected_only,"d0,d3",6.193805,0.986635,0.909044,3171.228,512,207,d0=65;d3=142,0,2,2,2,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.4_p8,selected_only_threshold,selected_only,"d0,d3",6.113898,0.973906,0.920925,3130.316,512,202,d0=56;d3=146,0,2,2,2,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.4_p16,selected_only_threshold,selected_only,"d0,d3",6.212623,0.989632,0.906291,3180.863,512,209,d0=70;d3=139,0,2,2,2,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.5_p8,selected_only_threshold,selected_only,"d0,d3",6.10452,0.972412,0.92234,3125.514,512,202,d0=57;d3=145,0,2,2,2,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.5_p16,selected_only_threshold,selected_only,"d0,d3",6.438145,1.025556,0.874544,3296.33,512,221,d0=88;d3=133,0,2,2,2,threshold=0.5;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.6_p8,selected_only_threshold,selected_only,"d0,d3",6.175027,0.983643,0.911809,3161.614,512,207,d0=67;d3=140,0,2,2,2,threshold=0.6;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.6_p16,selected_only_threshold,selected_only,"d0,d3",6.414717,1.021824,0.877738,3284.335,512,222,d0=94;d3=128,0,2,2,2,threshold=0.6;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.8_p8,selected_only_threshold,selected_only,"d0,d3",6.156266,0.980655,0.914587,3152.008,512,207,d0=69;d3=138,0,2,2,2,threshold=0.8;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+rag,selected_threshold_t0.8_p16,selected_only_threshold,selected_only,"d0,d3",6.405336,1.02033,0.879024,3279.532,512,222,d0=95;d3=127,0,2,2,2,threshold=0.8;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+rag,selected_threshold_t1.0_p8,selected_only_threshold,selected_only,"d0,d3",6.287865,1.001618,0.895446,3219.387,512,215,d0=83;d3=132,0,2,2,2,threshold=1.0;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+rag,selected_threshold_t1.0_p16,selected_only_threshold,selected_only,"d0,d3",6.377203,1.015849,0.882902,3265.128,512,222,d0=98;d3=124,0,2,2,2,threshold=1.0;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+rag,oracle,fixed,fixed,d0,5.630443,0.896895,1.0,2882.787,512,191,d0=69;d3=122,0,2,2,2,d=0,commit-aware per-workload oracle
+structured,fixed_d0,fixed,fixed,d0,12.024255,1.511752,0.553817,3066.185,255,255,d0=255,0,1,1,1,d=0,commit-aware replay
+structured,fixed_d1,fixed,fixed,d1,15.399586,1.936116,0.43243,3942.294,256,164,d1=164,0,1,1,1,d=1,commit-aware replay
+structured,fixed_d3,fixed,fixed,d3,7.953855,1.0,0.837234,2036.187,256,121,d3=121,0,1,1,1,d=3,commit-aware replay
+structured,fixed_d7,fixed,fixed,d7,16.713426,2.101299,0.398437,4278.637,256,103,d7=103,0,1,1,1,d=7,commit-aware replay
+structured,workload_label_chat0_else3,workload_label_upper_bound,workload_label,"d0,d3",7.953855,1.0,0.837234,2036.187,256,121,d3=121,0,1,1,1,chat/chat_low->d0;code/rag/structured->d3,commit-aware replay
+structured,goodput_only,goodput_only,full_candidate_info,"d0,d1,d3,d7",16.713426,2.101299,0.398437,4278.637,256,103,d7=103,0,1,1,1,choose max emitted tokens; tie high d,commit-aware replay
+structured,selected_threshold_t0.3_p8,selected_only_threshold,selected_only,"d0,d3",7.457094,0.937545,0.893008,1909.016,256,128,d0=51;d3=77,0,1,1,1,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.3_p16,selected_only_threshold,selected_only,"d0,d3",7.429016,0.934014,0.896383,1901.828,256,129,d0=56;d3=73,0,1,1,1,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.4_p8,selected_only_threshold,selected_only,"d0,d3",7.438332,0.935186,0.89526,1904.213,256,128,d0=52;d3=76,0,1,1,1,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.4_p16,selected_only_threshold,selected_only,"d0,d3",7.429016,0.934014,0.896383,1901.828,256,129,d0=56;d3=73,0,1,1,1,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.5_p8,selected_only_threshold,selected_only,"d0,d3",7.438332,0.935186,0.89526,1904.213,256,128,d0=52;d3=76,0,1,1,1,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.5_p16,selected_only_threshold,selected_only,"d0,d3",7.429016,0.934014,0.896383,1901.828,256,129,d0=56;d3=73,0,1,1,1,threshold=0.5;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.6_p8,selected_only_threshold,selected_only,"d0,d3",7.682629,0.9659,0.866792,1966.753,256,134,d0=60;d3=74,0,1,1,1,threshold=0.6;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.6_p16,selected_only_threshold,selected_only,"d0,d3",7.851957,0.987189,0.8481,2010.101,256,142,d0=79;d3=63,0,1,1,1,threshold=0.6;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.8_p8,selected_only_threshold,selected_only,"d0,d3",7.927012,0.996625,0.84007,2029.315,256,142,d0=75;d3=67,0,1,1,1,threshold=0.8;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+structured,selected_threshold_t0.8_p16,selected_only_threshold,selected_only,"d0,d3",8.359414,1.050989,0.796616,2140.01,256,156,d0=101;d3=55,0,1,1,1,threshold=0.8;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+structured,selected_threshold_t1.0_p8,selected_only_threshold,selected_only,"d0,d3",7.90825,0.994266,0.842063,2024.512,256,142,d0=76;d3=66,0,1,1,1,threshold=1.0;alpha=0.3;probe_interval=8;min_samples=4,commit-aware replay
+structured,selected_threshold_t1.0_p16,selected_only_threshold,selected_only,"d0,d3",8.960812,1.1266,0.743152,2293.968,256,172,d0=125;d3=47,0,1,1,1,threshold=1.0;alpha=0.3;probe_interval=16;min_samples=4,commit-aware replay
+structured,oracle,fixed,fixed,d0,6.659242,0.837234,1.0,1704.766,256,121,d0=69;d3=52,0,1,1,1,d=0,commit-aware per-workload oracle

@@ -1,0 +1,11 @@
+rank_by_train,policy,parameters,train_ms_per_token,train_relative_to_fixed_d3,train_oracle_reach,train_choices,test_ms_per_token,test_relative_to_fixed_d3,test_oracle_reach,test_choices,train_missing_transitions,test_missing_transitions
+1,selected_threshold_t0.4_p16,threshold=0.4;alpha=0.2;probe_interval=16;min_samples=4,9.872624,0.878319,0.879607,d0=735;d3=224,8.491712,0.919763,0.878592,d0=559;d3=249,0,0
+2,selected_threshold_t0.5_p16,threshold=0.5;alpha=0.2;probe_interval=16;min_samples=4,9.876408,0.878656,0.87927,d0=741;d3=220,8.473022,0.917738,0.88053,d0=564;d3=244,0,0
+3,selected_threshold_t0.3_p16,threshold=0.3;alpha=0.2;probe_interval=16;min_samples=4,9.883908,0.879323,0.878603,d0=732;d3=227,8.532831,0.924216,0.874358,d0=548;d3=260,0,0
+4,selected_threshold_t0.3_p16,threshold=0.3;alpha=0.3;probe_interval=16;min_samples=4,9.887668,0.879658,0.878269,d0=731;d3=228,8.517879,0.922597,0.875893,d0=552;d3=256,0,0
+5,selected_threshold_t0.4_p16,threshold=0.4;alpha=0.3;probe_interval=16;min_samples=4,9.887691,0.87966,0.878267,d0=738;d3=223,8.491711,0.919763,0.878592,d0=559;d3=249,0,0
+6,selected_threshold_t0.5_p8,threshold=0.5;alpha=0.2;probe_interval=8;min_samples=4,9.917568,0.882318,0.875621,d0=667;d3=276,8.469087,0.917312,0.880939,d0=502;d3=288,0,0
+7,selected_threshold_t0.5_p8,threshold=0.5;alpha=0.3;probe_interval=8;min_samples=4,9.921329,0.882652,0.875289,d0=666;d3=277,8.530829,0.924,0.874563,d0=503;d3=292,0,0
+8,selected_threshold_t0.4_p8,threshold=0.4;alpha=0.3;probe_interval=8;min_samples=4,9.926935,0.883151,0.874795,d0=654;d3=286,8.478397,0.918321,0.879972,d0=489;d3=298,0,0
+9,selected_threshold_t0.4_p8,threshold=0.4;alpha=0.2;probe_interval=8;min_samples=4,9.926959,0.883153,0.874793,d0=661;d3=281,8.478398,0.918321,0.879972,d0=489;d3=298,0,0
+10,selected_threshold_t0.3_p8,threshold=0.3;alpha=0.3;probe_interval=8;min_samples=4,9.936261,0.883981,0.873974,d0=627;d3=306,8.508303,0.92156,0.876879,d0=481;d3=306,0,0
