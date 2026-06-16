@@ -1,0 +1,99 @@
+def normalize_score(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_latency(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_tokens(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_acceptance(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_score(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_latency(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_tokens(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_acceptance(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_score(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_latency(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_tokens(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_acceptance(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_score(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_latency(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_tokens(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_acceptance(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_score(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_latency(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_tokens(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale
+
+def normalize_acceptance(value, scale):
+    if scale == 0:
+        return 0
+    return value / scale

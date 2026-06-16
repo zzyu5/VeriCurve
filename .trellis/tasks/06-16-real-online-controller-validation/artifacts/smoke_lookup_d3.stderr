@@ -1,0 +1,16 @@
+0.00.012.092 I common_init_result: fitting params to device memory ...
+0.00.012.103 I common_init_result: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+0.00.317.054 I common_params_fit_impl: projected to use 3777 MiB of host memory vs. 124574 MiB of total host memory
+0.01.518.132 W llama_context: n_ctx_seq (256) < n_ctx_train (4096) -- the full capacity of the model will not be utilized
+0.01.776.942 I common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+/home/ubuntu/vericurve-rv-lab/llama.cpp/src/llama-context.cpp:1744: GGML_ASSERT(n_tokens_all <= cparams.n_batch) failed
+/home/ubuntu/vericurve-rv-lab/llama.cpp/build-vericurve/bin/libggml-base.so.0(+0x158ea)[0x7fff807758ea]
+/home/ubuntu/vericurve-rv-lab/llama.cpp/build-vericurve/bin/libggml-base.so.0(ggml_print_backtrace+0x1a8)[0x7fff80775c72]
+/home/ubuntu/vericurve-rv-lab/llama.cpp/build-vericurve/bin/libggml-base.so.0(ggml_abort+0xec)[0x7fff80775dba]
+/home/ubuntu/vericurve-rv-lab/llama.cpp/build-vericurve/bin/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x1414)[0x7fff804b167a]
+/home/ubuntu/vericurve-rv-lab/llama.cpp/build-vericurve/bin/libllama.so.0(llama_decode+0xa)[0x7fff804b18a0]
+build-vericurve/bin/llama-lookup(main+0x3ac)[0x555589f08aec]
+/lib/riscv64-linux-gnu/libc.so.6(+0x277cc)[0x7fff802a77cc]
+/lib/riscv64-linux-gnu/libc.so.6(__libc_start_main+0x78)[0x7fff802a7878]
+build-vericurve/bin/llama-lookup(+0x3548)[0x555589f09548]
+timeout: the monitored command dumped core

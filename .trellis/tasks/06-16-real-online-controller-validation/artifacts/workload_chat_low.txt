@@ -1,0 +1,42 @@
+User: Summarize the tradeoff between memory bandwidth and arithmetic intensity in one paragraph.
+Assistant: Memory bandwidth limits workloads that move many bytes for each operation, while arithmetic intensity helps a kernel reuse data enough to keep execution units busy.
+User: Explain why a benchmark can look faster after changing the prompt length.
+Assistant: Prompt length changes batching, cache state, and the amount of setup work amortized over generated tokens, so the timing can shift even when the kernel is unchanged.
+User: Give a short note about preserving raw logs.
+Assistant: Raw logs keep command lines, warnings, failures, and timing context that a parsed table can accidentally hide.
+User: What makes an online controller hard to evaluate?
+Assistant: It must react to phase changes without overreacting to noisy single-token acceptance outcomes.
+User: Describe a careful remote experiment policy.
+Assistant: Use an isolated directory, a fixed thread count, low priority, short timeouts, and stop when unrelated jobs appear.
+User: Why can a fixed draft length be a strong baseline?
+Assistant: If workload behavior is stable, a fixed length selected offline can already capture most of the available gain.
+User: What is the danger of a goodput-only controller?
+Assistant: It may choose a long draft because acceptance is high while ignoring verifier cost and therefore lose latency.
+User: Define an oracle replay in this setting.
+Assistant: It is an offline calculation that chooses the best action using future acceptance information from a recorded trace.
+User: How should a failed run be reported?
+Assistant: Record the exact failing command, the error message, and why the failure changes the next action.
+User: Why should d equals fifteen be kept out of the main claim?
+Assistant: The corresponding T equals sixteen verifier point is still a composed estimate rather than a native integrated path.
+User: Give an example of a workload that may have low lookup acceptance.
+Assistant: A sequence of varied questions with few repeated phrases may not provide useful ngram matches for prompt lookup.
+User: Give an example of a workload that may have high lookup acceptance.
+Assistant: Repeated JSON records or boilerplate code often expose recurring token patterns that a lookup draft can reuse.
+User: Why is per-step trace better than aggregate trace?
+Assistant: Per-step trace reveals when the controller would switch, while aggregate trace only shows the average behavior after the fact.
+User: Explain why model choice matters.
+Assistant: Different tokenizers and output distributions change both the draft opportunities and the target verification cost.
+User: What should the next implementation avoid?
+Assistant: It should avoid broad scheduler rewrites and focus on trace fields, replay, and a disableable decision hook.
+User: Why is no speculation still needed as a baseline?
+Assistant: It shows whether speculation ever harms low-acceptance outputs and provides the conservative fallback cost.
+User: What does controller overhead measure?
+Assistant: It measures the time spent estimating acceptance, computing scores, logging decisions, and switching actions.
+User: Explain a switch margin.
+Assistant: A switch margin requires the new action to be sufficiently better before replacing the current draft budget.
+User: Explain minimum dwell.
+Assistant: Minimum dwell keeps the controller at one action for a few windows before allowing another switch.
+User: What would make this direction a no-go?
+Assistant: If fixed draft length or simple goodput adaptation matches the curve-aware policy, the controller contribution weakens.
+User: What would make it a full-system go?
+Assistant: It must beat strong fixed baselines, approach oracle replay, avoid low-acceptance regressions, and keep overhead small.

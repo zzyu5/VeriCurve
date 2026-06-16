@@ -1,0 +1,9 @@
+{"file": ".trellis/spec/project/paper-claims.md", "reason": "Check that evidence claims are not overstated."}
+{"file": ".trellis/spec/llamacpp-rvv/current-path-audit.md", "reason": "Check the current-path classification and required artifacts."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Check that remote commands stayed within safety limits."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Check the preliminary direction label against Go/No-Go criteria."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Check that command outputs and metadata were persisted."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/rvv_preflight.md", "reason": "Evidence for remote safety compliance."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/remote_llamacpp_recon.md", "reason": "Evidence for remote source and build claims."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/C_old_prompt_T_rvv_threads1.md", "reason": "Evidence for first C_old(T) curve and repeated_t1-like classification."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/go_nogo_preliminary.md", "reason": "Evidence for preliminary Go/No-Go label."}

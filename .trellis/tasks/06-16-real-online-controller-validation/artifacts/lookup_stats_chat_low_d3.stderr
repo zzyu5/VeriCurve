@@ -1,0 +1,13 @@
+0.00.008.952 I common_init_result: fitting params to device memory ...
+0.00.008.963 I common_init_result: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+0.00.215.848 I common_params_fit_impl: projected to use 3787 MiB of host memory vs. 124574 MiB of total host memory
+0.01.076.343 W llama_context: n_ctx_seq (256) < n_ctx_train (4096) -- the full capacity of the model will not be utilized
+0.01.329.459 I common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+0.14.296.902 I 
+0.14.296.905 I n_draft      = 3
+0.14.296.907 I n_predict    = 768
+0.14.296.908 I n_drafted    = 202
+0.14.296.915 I t_draft_flat = 0.00 ms
+0.14.296.923 I t_draft      = 3.00 ms, 14.87 us per token, 67266.07 tokens per second
+0.14.296.924 I n_accept     = 112
+0.14.296.926 I accept       = 55.446%

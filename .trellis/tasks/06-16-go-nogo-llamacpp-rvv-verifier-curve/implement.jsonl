@@ -1,0 +1,11 @@
+{"file": ".trellis/spec/project/positioning.md", "reason": "Keep the task aligned with the VeriCurve-RV thesis and non-goals."}
+{"file": ".trellis/spec/project/scope.md", "reason": "Constrain the task to the first-paper minimal scope and fallback boundaries."}
+{"file": ".trellis/spec/llamacpp-rvv/current-path-audit.md", "reason": "Define how to classify current llama.cpp/RVV verifier behavior."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Required safety protocol before any shared rvv command beyond local inspection."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Defines the mandatory Go/No-Go sequence and direction labels."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Defines how to persist evidence and command metadata."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/design-source-summary.md", "reason": "Condensed source-design summary for this task."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/local_llamacpp_path_audit.md", "reason": "Local and latest-source path audit evidence for follow-up implementation."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/remote_llamacpp_recon.md", "reason": "Remote clone, configure, and partial build evidence for follow-up work."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/C_old_prompt_T_rvv_threads1.md", "reason": "First bounded C_old(T) measurement used to choose the next kernel experiment."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/go_nogo_preliminary.md", "reason": "Preliminary direction label and next task guidance."}

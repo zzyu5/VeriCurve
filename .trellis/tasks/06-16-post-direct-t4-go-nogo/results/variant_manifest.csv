@@ -1,0 +1,6 @@
+variant,kind,R,layout,description
+old_vecdot_nrc1,old,1,llama.cpp current,current ggml_vec_dot_q4_0_q8_0 nrc=1 old path
+R1_no_pack,rtile_ttile,1,no_pack,custom block-outer RTile=1 no-pack variant
+R2_no_pack,rtile_ttile,2,no_pack,custom block-outer RTile=2 no-pack variant
+R4_no_pack,rtile_ttile,4,no_pack,custom block-outer RTile=4 no-pack variant
+R8_no_pack,rtile_ttile,8,no_pack,custom block-outer RTile=8 no-pack variant

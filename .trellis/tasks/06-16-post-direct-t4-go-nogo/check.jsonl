@@ -1,0 +1,6 @@
+{"file": ".trellis/tasks/06-16-post-direct-t4-go-nogo/prd.md", "reason": "Check artifacts and final summary against the required branch gates and output template."}
+{"file": ".trellis/tasks/06-16-post-direct-t4-go-nogo/research/inherited_conclusion.md", "reason": "Verify the final recommendation is consistent with prior direct R1T4 evidence."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Validate status labels and numerical thresholds."}
+{"file": ".trellis/spec/curve-system/kernel-design.md", "reason": "Validate whether any new kernel evidence is materially different from direct R1T4."}
+{"file": ".trellis/spec/llamacpp-rvv/current-path-audit.md", "reason": "Validate repack/16x1 path audit completeness and call-path classification."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Verify remote actions stayed within the low-risk shared-machine protocol."}

@@ -1,0 +1,61 @@
+workload,draft_source,d,rounds,E_accept,acceptance_per_draft,full_accept_rate,acceptance_histogram,method
+chat,ngram-simple,1,101,0,0.0,0.0,"{""0"": 101}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-simple,3,99,0,0.0,0.0,"{""0"": 99}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-simple,7,95,0,0.0,0.0,"{""0"": 95}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-simple,15,87,0,0.0,0.0,"{""0"": 87}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-map,1,101,0.079208,0.079208,0.079208,"{""0"": 93, ""1"": 8}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-map,3,99,0.10101,0.03367,0.0,"{""0"": 91, ""1"": 6, ""2"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-map,7,95,0.105263,0.015038,0.0,"{""0"": 87, ""1"": 6, ""2"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-map,15,87,0.114943,0.007663,0.0,"{""0"": 79, ""1"": 6, ""2"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-mod,1,101,0.079208,0.079208,0.079208,"{""0"": 93, ""1"": 8}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-mod,3,99,0.10101,0.03367,0.0,"{""0"": 91, ""1"": 6, ""2"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-mod,7,95,0.105263,0.015038,0.0,"{""0"": 87, ""1"": 6, ""2"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+chat,ngram-mod,15,87,0.114943,0.007663,0.0,"{""0"": 79, ""1"": 6, ""2"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-simple,1,71,0.056338,0.056338,0.056338,"{""0"": 67, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-simple,3,69,0.057971,0.019324,0.0,"{""0"": 65, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-simple,7,65,0.061538,0.008791,0.0,"{""0"": 61, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-simple,15,57,0.052632,0.003509,0.0,"{""0"": 54, ""1"": 3}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-map,1,71,0.746479,0.746479,0.746479,"{""0"": 18, ""1"": 53}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-map,3,69,2.101449,0.700483,0.666667,"{""0"": 18, ""1"": 3, ""2"": 2, ""3"": 46}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-map,7,65,4.323077,0.617582,0.523077,"{""0"": 18, ""1"": 3, ""2"": 2, ""3"": 2, ""4"": 2, ""5"": 2, ""6"": 2, ""7"": 34}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-map,15,57,6.333333,0.422222,0.175439,"{""0"": 18, ""1"": 3, ""2"": 2, ""3"": 2, ""4"": 2, ""5"": 2, ""6"": 2, ""7"": 2, ""8"": 2, ""9"": 2, ""10"": 2, ""11"": 2, ""12"": 2, ""13"": 2, ""14"": 2, ""15"": 10}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-mod,1,71,0.56338,0.56338,0.56338,"{""0"": 31, ""1"": 40}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-mod,3,69,1.072464,0.357488,0.188406,"{""0"": 30, ""1"": 17, ""2"": 9, ""3"": 13}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-mod,7,65,1.184615,0.169231,0.0,"{""0"": 29, ""1"": 16, ""2"": 8, ""3"": 6, ""4"": 3, ""5"": 3}",deterministic_ngram_proxy_over_fixed_workload_tokens
+code,ngram-mod,15,57,1.140351,0.076023,0.0,"{""0"": 26, ""1"": 13, ""2"": 8, ""3"": 6, ""4"": 2, ""5"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-simple,1,86,0,0.0,0.0,"{""0"": 86}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-simple,3,84,0,0.0,0.0,"{""0"": 84}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-simple,7,80,0,0.0,0.0,"{""0"": 80}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-simple,15,72,0,0.0,0.0,"{""0"": 72}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-map,1,86,0.453488,0.453488,0.453488,"{""0"": 47, ""1"": 39}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-map,3,84,1.083333,0.361111,0.297619,"{""0"": 47, ""1"": 8, ""2"": 4, ""3"": 25}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-map,7,80,2.05,0.292857,0.1875,"{""0"": 43, ""1"": 8, ""2"": 4, ""3"": 3, ""4"": 3, ""5"": 2, ""6"": 2, ""7"": 15}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-map,15,72,2.902778,0.193519,0.0,"{""0"": 38, ""1"": 6, ""2"": 3, ""3"": 3, ""4"": 3, ""5"": 2, ""6"": 2, ""7"": 2, ""8"": 2, ""9"": 2, ""10"": 2, ""11"": 2, ""12"": 2, ""13"": 2, ""14"": 1}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-mod,1,86,0.406977,0.406977,0.406977,"{""0"": 51, ""1"": 35}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-mod,3,84,0.869048,0.289683,0.202381,"{""0"": 51, ""1"": 10, ""2"": 6, ""3"": 17}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-mod,7,80,1.2375,0.176786,0.025,"{""0"": 47, ""1"": 10, ""2"": 6, ""3"": 5, ""4"": 4, ""5"": 4, ""6"": 2, ""7"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+rag,ngram-mod,15,72,1.319444,0.087963,0.0,"{""0"": 42, ""1"": 8, ""2"": 5, ""3"": 5, ""4"": 4, ""5"": 4, ""6"": 2, ""7"": 2}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-simple,1,94,0,0.0,0.0,"{""0"": 94}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-simple,3,92,0,0.0,0.0,"{""0"": 92}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-simple,7,88,0,0.0,0.0,"{""0"": 88}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-simple,15,80,0,0.0,0.0,"{""0"": 80}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-map,1,94,0.574468,0.574468,0.574468,"{""0"": 40, ""1"": 54}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-map,3,92,1.293478,0.431159,0.336957,"{""0"": 40, ""1"": 16, ""2"": 5, ""3"": 31}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-map,7,88,2.363636,0.337662,0.238636,"{""0"": 39, ""1"": 15, ""2"": 5, ""3"": 2, ""4"": 2, ""5"": 2, ""6"": 2, ""7"": 21}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-map,15,80,3.75,0.25,0.0625,"{""0"": 34, ""1"": 13, ""2"": 4, ""3"": 2, ""4"": 2, ""5"": 2, ""6"": 2, ""7"": 2, ""8"": 2, ""9"": 2, ""10"": 2, ""11"": 2, ""12"": 2, ""13"": 2, ""14"": 2, ""15"": 5}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-mod,1,94,0.340426,0.340426,0.340426,"{""0"": 62, ""1"": 32}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-mod,3,92,0.423913,0.141304,0.032609,"{""0"": 61, ""1"": 26, ""2"": 2, ""3"": 3}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-mod,7,88,0.431818,0.061688,0.0,"{""0"": 59, ""1"": 24, ""2"": 2, ""3"": 2, ""4"": 1}",deterministic_ngram_proxy_over_fixed_workload_tokens
+structured,ngram-mod,15,80,0.45,0.03,0.0,"{""0"": 53, ""1"": 22, ""2"": 2, ""3"": 2, ""4"": 1}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-simple,1,379,0.010554,0.010554,0.010554,"{""0"": 375, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-simple,3,377,0.01061,0.003537,0.0,"{""0"": 373, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-simple,7,373,0.010724,0.001532,0.0,"{""0"": 369, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-simple,15,365,0.010959,0.000731,0.0,"{""0"": 361, ""1"": 4}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-map,1,379,0.39314,0.39314,0.39314,"{""0"": 230, ""1"": 149}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-map,3,377,0.970822,0.323607,0.270557,"{""0"": 230, ""1"": 30, ""2"": 15, ""3"": 102}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-map,7,373,1.836461,0.262352,0.190349,"{""0"": 229, ""1"": 29, ""2"": 15, ""3"": 8, ""4"": 7, ""5"": 7, ""6"": 7, ""7"": 71}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-map,15,365,2.734247,0.182283,0.043836,"{""0"": 224, ""1"": 27, ""2"": 14, ""3"": 8, ""4"": 7, ""5"": 7, ""6"": 7, ""7"": 7, ""8"": 7, ""9"": 7, ""10"": 7, ""11"": 7, ""12"": 7, ""13"": 7, ""14"": 6, ""15"": 16}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-mod,1,379,0.39314,0.39314,0.39314,"{""0"": 230, ""1"": 149}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-mod,3,377,0.970822,0.323607,0.270557,"{""0"": 230, ""1"": 30, ""2"": 15, ""3"": 102}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-mod,7,373,1.836461,0.262352,0.190349,"{""0"": 229, ""1"": 29, ""2"": 15, ""3"": 8, ""4"": 7, ""5"": 7, ""6"": 7, ""7"": 71}",deterministic_ngram_proxy_over_fixed_workload_tokens
+mixed,ngram-mod,15,365,2.734247,0.182283,0.043836,"{""0"": 224, ""1"": 27, ""2"": 14, ""3"": 8, ""4"": 7, ""5"": 7, ""6"": 7, ""7"": 7, ""8"": 7, ""9"": 7, ""10"": 7, ""11"": 7, ""12"": 7, ""13"": 7, ""14"": 6, ""15"": 16}",deterministic_ngram_proxy_over_fixed_workload_tokens

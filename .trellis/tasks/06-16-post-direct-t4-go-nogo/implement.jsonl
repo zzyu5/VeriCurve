@@ -1,0 +1,8 @@
+{"file": ".trellis/tasks/06-16-post-direct-t4-go-nogo/prd.md", "reason": "Primary requirements, branch gates, artifact list, and final decision template for the post-direct-T4 Go/No-Go task."}
+{"file": ".trellis/tasks/06-16-post-direct-t4-go-nogo/research/inherited_conclusion.md", "reason": "Evidence from the failed direct R1T4 task; prevents repeating the invalid direct-kernel path."}
+{"file": ".trellis/tasks/06-16-post-direct-t4-go-nogo/research/pro2_guidance_summary.md", "reason": "Compact summary of pro2.md guidance for branch A/B/C/D execution."}
+{"file": ".trellis/spec/project/scope.md", "reason": "Project-level gates and controller-readiness restrictions after direct R1T4 failure."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Go/No-Go thresholds for curve shaping, schedule variants, cache characterization, and controller readiness."}
+{"file": ".trellis/spec/curve-system/kernel-design.md", "reason": "Required post-direct RTile x TTile and layout-aware kernel design constraints."}
+{"file": ".trellis/spec/llamacpp-rvv/current-path-audit.md", "reason": "Trace and repack-path audit contract for llama.cpp/RVV evidence."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Remote rvv safety protocol to avoid interfering with TianchenRV or other shared work."}

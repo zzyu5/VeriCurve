@@ -1,0 +1,3 @@
+run_id,method,status,model,workload,d,requested_T,threads,n_predict,n_drafted,n_accept,acceptance,prompt_eval_ms,prompt_tokens,eval_ms,eval_runs,total_time_ms,q4_0_q8_0_call_count,last_n,last_nrc,notes
+smoke_lookup_d3_b64,real_llama_lookup_decode,success,/home/ubuntu/llama-2-7b-chat.Q4_0.gguf,short_chat,3,4,1,9,0,0,,84914.11,16,43383.58,8,128302.12,34964992,11008,1,"real target decode ran and emitted GGML_VERICURVE_TRACE, but prompt lookup drafted zero tokens; useful as integrated smoke, not acceptance evidence"
+smoke_lookup_d3_b8,real_llama_lookup_decode,failed_assert,/home/ubuntu/llama-2-7b-chat.Q4_0.gguf,short_chat,3,4,1,,,,,,,,,,,"","batch size 8 was smaller than prompt token count; llama_context decode assert n_tokens_all <= n_batch"

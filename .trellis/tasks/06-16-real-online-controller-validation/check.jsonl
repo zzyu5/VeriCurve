@@ -1,0 +1,9 @@
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/prd.md", "reason": "Check task outputs against requested real trace/controller artifacts."}
+{"file": "doc/pro6.md", "reason": "Check pro6 requested commit-aware replay, gap decomposition, policy family, and train/test outputs."}
+{"file": ".trellis/spec/curve-system/controller.md", "reason": "Validate controller scoring, oracle convention, and Go/No-Go decision."}
+{"file": ".trellis/spec/curve-system/profiler.md", "reason": "Validate profile metadata and stable measurement conditions."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Validate reproducibility metadata and remote source-tree audit."}
+{"file": ".trellis/spec/experiments/workloads.md", "reason": "Validate workload coverage and acceptance drift claims."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Validate remote commands stayed conservative."}
+{"file": ".trellis/spec/llamacpp-rvv/runtime-boundary.md", "reason": "Validate llama.cpp changes are narrow and disableable."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/replay_correctness_audit.md", "reason": "Check selected-only claims are blocked when trace coverage is insufficient."}

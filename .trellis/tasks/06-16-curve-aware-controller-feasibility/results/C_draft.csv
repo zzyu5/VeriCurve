@@ -1,0 +1,13 @@
+draft_source,d,C_draft_ns,C_draft_ms,method,notes
+ngram-simple,1,3973,0.003973,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-simple,3,5076,0.005076,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-simple,7,6756,0.006756,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-simple,15,9816,0.009816,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-map,1,19272,0.019272,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-map,3,32868,0.032868,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-map,7,59580,0.05958,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-map,15,118287,0.118287,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-mod,1,12250,0.01225,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-mod,3,27651,0.027651,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-mod,7,51974,0.051974,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80
+ngram-mod,15,99627,0.099627,python_ngram_proxy_remote_cpu,avg per draft round across 656 positions; repeats=80

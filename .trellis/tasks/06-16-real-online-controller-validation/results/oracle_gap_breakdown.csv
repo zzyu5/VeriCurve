@@ -1,0 +1,19 @@
+mode,scope,category,key,steps,policy_ms_per_token,oracle_choice_ms_per_token,oracle_rate_reference,oracle_reach,policy_choices,oracle_choices,policy_total_cost_ms,policy_total_tokens,oracle_total_cost_ms,oracle_total_tokens,excess_cost_at_oracle_rate_ms,notes
+recorded_position_scan,chat,workload_summary,chat,424,12.967619,10.524149,10.524149,0.811571,d0=338;d3=86,d0=368;d3=56,5511.238,425,5367.316,510,1038.474667,full-info EWMA vs per-workload scan oracle
+recorded_position_scan,chat,fixed_d3_summary,chat,424,13.989798,10.524149,10.524149,0.752273,d3=424,d0=368;d3=56,7134.797,510,5367.316,510,1767.481,fixed d3 vs per-workload scan oracle
+recorded_position_scan,chat_low,workload_summary,chat_low,653,12.433298,10.608045,10.608045,0.853196,d0=543;d3=110,d0=593;d3=58;d7=2,8380.043,674,8189.411,772,1230.220443,full-info EWMA vs per-workload scan oracle
+recorded_position_scan,chat_low,fixed_d3_summary,chat_low,653,14.363591,10.608045,10.608045,0.738537,d3=653,d0=593;d3=58;d7=2,10988.147,765,8189.411,772,2872.992317,fixed d3 vs per-workload scan oracle
+recorded_position_scan,code,workload_summary,code,167,5.143701,5.029129,5.029129,0.977726,d0=40;d3=127,d0=49;d3=118,2618.144,509,2574.914,512,58.317387,full-info EWMA vs per-workload scan oracle
+recorded_position_scan,code,fixed_d3_summary,code,167,5.488783,5.029129,5.029129,0.916256,d3=167,d0=49;d3=118,2810.257,512,2574.914,512,235.343,fixed d3 vs per-workload scan oracle
+recorded_position_scan,rag,workload_summary,rag,191,5.993597,5.630314,5.630314,0.939388,d0=44;d3=147,d0=69;d3=122,3002.792,501,2882.721,512,182.004459,full-info EWMA vs per-workload scan oracle
+recorded_position_scan,rag,fixed_d3_summary,rag,191,6.27758,5.630314,5.630314,0.896892,d3=191,d0=69;d3=122,3214.121,512,2882.721,512,331.4,fixed d3 vs per-workload scan oracle
+recorded_position_scan,structured,workload_summary,structured,121,7.20314,6.536108,6.536108,0.907397,d0=49;d3=72,d0=69;d3=30;d7=22,1800.785,250,2248.421,344,166.75811,full-info EWMA vs per-workload scan oracle
+recorded_position_scan,structured,fixed_d3_summary,structured,121,7.953676,6.536108,6.536108,0.821772,d3=121,d0=69;d3=30;d7=22,2036.141,256,2248.421,344,362.897465,fixed d3 vs per-workload scan oracle
+recorded_position_scan,mixed,workload_summary,mixed,1556,9.034761,7.666012,7.666012,0.848502,d0=1014;d3=542,d0=1148;d3=226;d7=182,21313.002,2359,25167.516,3283,3228.880695,full-info EWMA vs mixed scan oracle
+recorded_position_scan,mixed,fixed_d3_summary,mixed,1556,10.247931,7.666012,7.666012,0.748055,d3=1556,d0=1148;d3=226;d7=182,26183.463,2555,25167.516,3283,6596.803426,fixed d3 vs mixed scan oracle
+recorded_position_scan,mixed,regret_by_policy_d,d0,1014,12.024,10.468367,7.666012,0.870623,d0=1014,d0=901;d3=109;d7=4,12192.336,1014,12834.218,1226,983.312454,EWMA chosen-d bucket
+recorded_position_scan,mixed,regret_by_policy_d,d3,542,6.781164,5.99577,7.666012,0.88418,d3=542,d0=247;d3=117;d7=178,9120.666,1345,12333.298,2057,2245.568241,EWMA chosen-d bucket
+recorded_position_scan,mixed,regret_hotspot,choosing_d3_when_oracle_d0,247,16.827146,12.024,7.666012,0.71456,d3=247,d0=247,4156.305,247,2969.928,247,1186.377,named mismatch bucket
+recorded_position_scan,mixed,regret_hotspot,missing_d3,109,12.024,6.26084,7.666012,0.520695,d0=109,d3=109,1310.616,109,1834.426,293,886.73613,named mismatch bucket
+recorded_position_scan,mixed,regret_hotspot,staying_d0_when_oracle_d3,109,12.024,6.26084,7.666012,0.520695,d0=109,d3=109,1310.616,109,1834.426,293,886.73613,named mismatch bucket
+recorded_position_scan,mixed,regret_hotspot,staying_d0_when_oracle_d7,4,12.024,5.19275,7.666012,0.431865,d0=4,d7=4,48.096,4,166.168,32,96.576324,named mismatch bucket

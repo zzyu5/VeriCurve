@@ -1,0 +1,83 @@
+--- a/examples/lookup/lookup-stats.cpp
++++ b/examples/lookup/lookup-stats.cpp
+@@ -9,6 +9,7 @@
+ #include <clocale>
+ #include <cstdint>
+ #include <cstdio>
++#include <cstdlib>
+ #include <fstream>
+ #include <string>
+ #include <vector>
+@@ -75,6 +76,18 @@
+ 
+     const int64_t t_start_ms = ggml_time_ms();
+ 
++    FILE * vc_trace = nullptr;
++    const char * vc_trace_path = std::getenv("VERICURVE_LOOKUP_TRACE_CSV");
++    if (vc_trace_path && vc_trace_path[0]) {
++        vc_trace = std::fopen(vc_trace_path, "w");
++        if (!vc_trace) {
++            LOG_ERR("failed to open VERICURVE_LOOKUP_TRACE_CSV: %s\n", vc_trace_path);
++            return 1;
++        }
++        std::fprintf(vc_trace,
++                "chunk_id,step_id,requested_d,drafted_count,accepted_count,pseudo_size_before,pseudo_size_after,trace_draft_update_us\n");
++    }
++
+     // Iterate over input tokens in chunks of size n_ctx.
+     // Each chunk is treated as if a sequential generation but with pre-determined tokens to ensure reproducibility.
+     for (int i_start = 0; i_start + n_ctx < n_input; i_start += n_ctx) {
+@@ -82,10 +95,14 @@
+         std::vector<llama_token> pseudo_output;
+         pseudo_output.push_back(inp_slice[0]);
+ 
++        int step_id = 0;
+         while ((int) pseudo_output.size() < n_ctx) {
+             // Simulate drafting and decoding from draft:
+             std::vector<llama_token> draft;
+             draft.push_back(pseudo_output.back());
++            const int pseudo_size_before = pseudo_output.size();
++            const int64_t trace_t_before_us = t_draft_us;
++            int round_accept = 0;
+ 
+             {
+                 const int64_t t_start_draft_us = ggml_time_us();
+@@ -104,6 +121,7 @@
+                 }
+ 
+                 ++n_accept;
++                ++round_accept;
+                 pseudo_output.push_back(ground_truth);
+ 
+                 {
+@@ -123,6 +141,19 @@
+                 }
+             }
+ 
++            if (vc_trace) {
++                std::fprintf(vc_trace, "%d,%d,%d,%zu,%d,%d,%zu,%" PRId64 "\n",
++                        i_start / n_ctx,
++                        step_id,
++                        n_draft,
++                        draft.size() > 0 ? draft.size() - 1 : 0,
++                        round_accept,
++                        pseudo_size_before,
++                        pseudo_output.size(),
++                        t_draft_us - trace_t_before_us);
++            }
++            ++step_id;
++
+             draft.erase(draft.begin());
+ 
+         }
+@@ -152,6 +183,10 @@
+     LOG_INF("n_accept     = %d\n", n_accept);
+     LOG_INF("accept       = %.3f%%\n", 100.0f * n_accept / n_drafted);
+ 
++    if (vc_trace) {
++        std::fclose(vc_trace);
++    }
++
+     llama_backend_free();
+ 
+     LOG("\n\n");

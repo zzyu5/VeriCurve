@@ -1,0 +1,7 @@
+baseline,ms_per_token,relative_to_vericurve,notes
+B0_no_speculation,12.024,1.461758,d=0 for all workloads
+B2_fixed_d3,9.047758,1.099936,best source with d=3 over mixed workloads
+B4_offline_best_fixed_mixed,9.047758,1.099936,single fixed policy ngram-map d=3
+B5_goodput_only_adaptive,31.193434,3.792186,"per workload choose max E_accept, ignoring costs"
+B6_Vericurve_RV_offline,8.225712,1.0,per workload choose min J_new
+B7_oracle,7.189835,0.874068,per position choose best source/d with actual future acceptance

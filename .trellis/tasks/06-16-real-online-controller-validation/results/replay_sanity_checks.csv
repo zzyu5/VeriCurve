@@ -1,0 +1,26 @@
+scope,candidate_d,recorded_positions,present_next_position,missing_next_position,terminal_next_position,present_fraction_nonterminal,emitted_tokens_min,emitted_tokens_max,exact_commit_replay_supported,notes
+chat,0,424,367,55,2,0.869668,1,1,no,non-d3 path needs position-complete trace when next positions are missing
+chat,1,424,398,24,2,0.943128,1,2,no,non-d3 path needs position-complete trace when next positions are missing
+chat,3,424,422,0,2,1.0,1,4,yes,d=3 should be exact for the committed trace
+chat,7,424,422,0,2,1.0,1,5,yes,non-d3 path needs position-complete trace when next positions are missing
+chat_low,0,653,590,60,3,0.907692,1,1,no,non-d3 path needs position-complete trace when next positions are missing
+chat_low,1,653,618,32,3,0.950769,1,2,no,non-d3 path needs position-complete trace when next positions are missing
+chat_low,3,653,650,0,3,1.0,1,4,yes,d=3 should be exact for the committed trace
+chat_low,7,653,650,0,3,1.0,1,8,yes,non-d3 path needs position-complete trace when next positions are missing
+code,0,167,49,116,2,0.29697,1,1,no,non-d3 path needs position-complete trace when next positions are missing
+code,1,167,51,114,2,0.309091,1,2,no,non-d3 path needs position-complete trace when next positions are missing
+code,3,167,165,0,2,1.0,1,4,yes,d=3 should be exact for the committed trace
+code,7,167,163,0,4,1.0,1,8,yes,non-d3 path needs position-complete trace when next positions are missing
+rag,0,191,69,120,2,0.365079,1,1,no,non-d3 path needs position-complete trace when next positions are missing
+rag,1,191,84,105,2,0.444444,1,2,no,non-d3 path needs position-complete trace when next positions are missing
+rag,3,191,189,0,2,1.0,1,4,yes,d=3 should be exact for the committed trace
+rag,7,191,187,0,4,1.0,1,8,yes,non-d3 path needs position-complete trace when next positions are missing
+structured,0,121,69,51,1,0.575,1,1,no,non-d3 path needs position-complete trace when next positions are missing
+structured,1,121,77,43,1,0.641667,1,2,no,non-d3 path needs position-complete trace when next positions are missing
+structured,3,121,120,0,1,1.0,1,4,yes,d=3 should be exact for the committed trace
+structured,7,121,120,0,1,1.0,1,8,yes,non-d3 path needs position-complete trace when next positions are missing
+mixed,0,1556,1144,402,10,0.739974,1,1,no,global transition coverage
+mixed,1,1556,1228,318,10,0.794308,1,2,no,global transition coverage
+mixed,3,1556,1546,0,10,1.0,1,4,yes,global transition coverage
+mixed,7,1556,1542,0,14,1.0,1,8,yes,global transition coverage
+metadata,,1556,,,,,,,all_candidate_rows_complete,incomplete aligned step groups skipped=0

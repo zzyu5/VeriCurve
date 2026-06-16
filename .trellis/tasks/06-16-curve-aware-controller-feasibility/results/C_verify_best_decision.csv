@@ -1,0 +1,5 @@
+metric,value
+status,GO
+C_best_4_div_C_best_1,1.399317
+crossover_observed,yes
+winner_variants,R8_no_pack;R8_rowblocked_weights_total;old_vecdot_nrc1;two_R8T8_no_pack_tiles_composed

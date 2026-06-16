@@ -1,0 +1,21 @@
+metric,value
+status,STRONG GO
+C_old_T1_ns,12024312
+C_old_T1_ms,12.024
+C_old_T4_ns,48085457
+C_old_T4_ms,48.085
+C_best_T1_ns,12024312
+C_best_T1_ms,12.024
+C_candidate_T4_no_pack_ns,20855916
+C_candidate_T4_no_pack_ms,20.856
+C_candidate_T4_no_pack_variant,R8 Layout0_no_packing
+C_candidate_T4_with_pack_ns,16825821
+C_candidate_T4_with_pack_ms,16.826
+C_candidate_T4_with_pack_variant,R8 Layout2_rowblocked_weights
+C_candidate_T4_total_ns,16825821
+C_candidate_T4_total_ms,16.826
+speedup_vs_old_T4_x,2.857837
+candidate_total_div_old_T4,0.349915
+curve_ratio_candidate_total_div_best_T1,1.399317
+correctness_max_abs,0
+correctness_max_rel,0

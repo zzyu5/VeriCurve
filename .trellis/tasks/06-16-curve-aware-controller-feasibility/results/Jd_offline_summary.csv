@@ -1,0 +1,6 @@
+workload,best_d_old_curve,best_source_old_curve,best_J_old_ms,best_d_new_curve,best_source_new_curve,best_J_new_ms,best_d_fixed_default,best_source_fixed_d3,fixed_d3_J_new_ms,predicted_speedup_vs_no_spec,predicted_speedup_vs_fixed_d3
+chat,0,none,12.024,0,none,12.024,3,ngram-mod,15.307446,1.0,1.273074
+code,0,none,12.024,3,ngram-map,5.435804,3,ngram-map,5.435804,2.212,1.0
+rag,0,none,12.024,3,ngram-map,8.092258,3,ngram-map,8.092258,1.485865,1.0
+structured,0,none,12.024,3,ngram-map,7.350787,3,ngram-map,7.350787,1.635743,1.0
+mixed,0,none,12.024,3,ngram-mod,8.551585,3,ngram-mod,8.551585,1.406055,1.0

@@ -1,0 +1,7 @@
+{"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/prd.md", "reason": "Verify task artifacts and final decision against pro3 requirements."}
+{"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/research/inherited_controller_entry.md", "reason": "Ensure controller work stays based on row-blocked RTile x TTile evidence."}
+{"file": ".trellis/spec/curve-system/profiler.md", "reason": "Check C_verify/C_draft/acceptance result completeness."}
+{"file": ".trellis/spec/curve-system/controller.md", "reason": "Check J(d), baselines, and controller Go/No-Go thresholds."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Validate status labels and current controller readiness."}
+{"file": ".trellis/spec/experiments/workloads.md", "reason": "Validate workload coverage and acceptance-drift claims."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Verify remote actions stayed within safety protocol."}

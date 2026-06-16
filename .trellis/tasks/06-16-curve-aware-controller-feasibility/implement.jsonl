@@ -1,0 +1,13 @@
+{"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/prd.md", "reason": "Primary requirements for C_verify_best, cheap draft, acceptance, J(d), and controller Go/No-Go."}
+{"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/research/pro3_guidance_summary.md", "reason": "pro3 interpretation and scope boundary for this next round."}
+{"file": ".trellis/tasks/06-16-curve-aware-controller-feasibility/research/inherited_controller_entry.md", "reason": "Prior STRONG GO/GO evidence that opens the controller phase."}
+{"file": ".trellis/spec/project/positioning.md", "reason": "Project thesis and contribution spine."}
+{"file": ".trellis/spec/project/scope.md", "reason": "Stage gates and controller entry conditions."}
+{"file": ".trellis/spec/project/paper-claims.md", "reason": "Evidence rules and claims to avoid."}
+{"file": ".trellis/spec/curve-system/profiler.md", "reason": "Required C_verify, C_draft, and acceptance profile fields."}
+{"file": ".trellis/spec/curve-system/controller.md", "reason": "J(d), controller state, stability rules, and full-system Go/No-Go."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Current post-direct decision and controller readiness criteria."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Artifact naming, metadata, and raw evidence requirements."}
+{"file": ".trellis/spec/experiments/workloads.md", "reason": "Workload buckets and acceptance drift metrics."}
+{"file": ".trellis/spec/llamacpp-rvv/runtime-boundary.md", "reason": "Allowed early llama.cpp runtime touch points and conservative integration boundary."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Remote rvv safety protocol."}

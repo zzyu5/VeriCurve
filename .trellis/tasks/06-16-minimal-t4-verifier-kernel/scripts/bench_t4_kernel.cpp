@@ -1,0 +1,256 @@
+#include "ggml.h"
+#include "ggml-cpu/quants.h"
+
+#include <riscv_vector.h>
+
+#include <chrono>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstdint>
+#include <vector>
+
+static float value_at(int i) {
+    uint32_t x = (uint32_t) i * 1664525u + 1013904223u;
+    x ^= x >> 16;
+    const int centered = (int) (x % 2001u) - 1000;
+    return (float) centered / 1000.0f;
+}
+
+static void fill_float(std::vector<float> & v, int seed) {
+    for (size_t i = 0; i < v.size(); ++i) {
+        v[i] = value_at((int) i + seed);
+    }
+}
+
+static double seconds_now() {
+    using clock = std::chrono::steady_clock;
+    return std::chrono::duration<double>(clock::now().time_since_epoch()).count();
+}
+
+static void q4_0_q8_0_dot_t4_rvv(
+        int n,
+        float out[4],
+        const block_q4_0 * x,
+        const block_q8_0 * y0,
+        const block_q8_0 * y1,
+        const block_q8_0 * y2,
+        const block_q8_0 * y3) {
+    const int qk = QK8_0;
+    const int nb = n / qk;
+    const size_t vl = qk / 2;
+
+    float sumf0 = 0.0f;
+    float sumf1 = 0.0f;
+    float sumf2 = 0.0f;
+    float sumf3 = 0.0f;
+
+    for (int ib = 0; ib < nb; ++ib) {
+        vuint8m1_t tx = __riscv_vle8_v_u8m1(x[ib].qs, vl);
+
+        vuint8m1_t x_a = __riscv_vand_vx_u8m1(tx, 0x0F, vl);
+        vuint8m1_t x_l = __riscv_vsrl_vx_u8m1(tx, 0x04, vl);
+        vint8m1_t x_ai = __riscv_vreinterpret_v_u8m1_i8m1(x_a);
+        vint8m1_t x_li = __riscv_vreinterpret_v_u8m1_i8m1(x_l);
+
+        vint8m1_t v0 = __riscv_vsub_vx_i8m1(x_ai, 8, vl);
+        vint8m1_t v1 = __riscv_vsub_vx_i8m1(x_li, 8, vl);
+
+        const float dx = ggml_fp16_to_fp32(x[ib].d);
+
+#define VC_ACCUM_ONE(Y, SUMF) do { \
+        vint8m1_t yy0 = __riscv_vle8_v_i8m1((Y)[ib].qs, vl); \
+        vint8m1_t yy1 = __riscv_vle8_v_i8m1((Y)[ib].qs + 16, vl); \
+        vint16m2_t vec_mul1 = __riscv_vwmul_vv_i16m2(v0, yy0, vl); \
+        vint16m2_t vec_mul2 = __riscv_vwmacc_vv_i16m2(vec_mul1, v1, yy1, vl); \
+        vint32m1_t vec_zero = __riscv_vmv_v_x_i32m1(0, vl); \
+        vint32m1_t vs2 = __riscv_vwredsum_vs_i16m2_i32m1(vec_mul2, vec_zero, vl); \
+        int sumi = __riscv_vmv_x_s_i32m1_i32(vs2); \
+        (SUMF) += sumi * dx * ggml_fp16_to_fp32((Y)[ib].d); \
+    } while (0)
+
+        VC_ACCUM_ONE(y0, sumf0);
+        VC_ACCUM_ONE(y1, sumf1);
+        VC_ACCUM_ONE(y2, sumf2);
+        VC_ACCUM_ONE(y3, sumf3);
+
+#undef VC_ACCUM_ONE
+    }
+
+    out[0] = sumf0;
+    out[1] = sumf1;
+    out[2] = sumf2;
+    out[3] = sumf3;
+}
+
+static double bench_old_t1(
+        int n,
+        int rows,
+        int repeats,
+        int warmup,
+        const std::vector<block_q4_0> & weights,
+        const std::vector<block_q8_0> & rhs,
+        int nb,
+        volatile float & sink) {
+    double total_ns = 0.0;
+    for (int iter = 0; iter < warmup + repeats; ++iter) {
+        const double t0 = seconds_now();
+        const block_q8_0 * y = rhs.data();
+        for (int r = 0; r < rows; ++r) {
+            float s = 0.0f;
+            const block_q4_0 * x = weights.data() + (size_t) r * nb;
+            ggml_vec_dot_q4_0_q8_0(n, &s, 0, x, 0, y, 0, 1);
+            sink += s * 0.0000001f;
+        }
+        const double t1 = seconds_now();
+        if (iter >= warmup) {
+            total_ns += (t1 - t0) * 1.0e9;
+        }
+    }
+    return total_ns / repeats;
+}
+
+static double bench_old_t4(
+        int n,
+        int rows,
+        int repeats,
+        int warmup,
+        const std::vector<block_q4_0> & weights,
+        const std::vector<block_q8_0> & rhs,
+        int nb,
+        volatile float & sink) {
+    double total_ns = 0.0;
+    for (int iter = 0; iter < warmup + repeats; ++iter) {
+        const double t0 = seconds_now();
+        for (int t = 0; t < 4; ++t) {
+            const block_q8_0 * y = rhs.data() + (size_t) t * nb;
+            for (int r = 0; r < rows; ++r) {
+                float s = 0.0f;
+                const block_q4_0 * x = weights.data() + (size_t) r * nb;
+                ggml_vec_dot_q4_0_q8_0(n, &s, 0, x, 0, y, 0, 1);
+                sink += s * 0.0000001f;
+            }
+        }
+        const double t1 = seconds_now();
+        if (iter >= warmup) {
+            total_ns += (t1 - t0) * 1.0e9;
+        }
+    }
+    return total_ns / repeats;
+}
+
+static double bench_new_t4(
+        int n,
+        int rows,
+        int repeats,
+        int warmup,
+        const std::vector<block_q4_0> & weights,
+        const std::vector<block_q8_0> & rhs,
+        int nb,
+        volatile float & sink) {
+    double total_ns = 0.0;
+    for (int iter = 0; iter < warmup + repeats; ++iter) {
+        const double t0 = seconds_now();
+        const block_q8_0 * y0 = rhs.data() + (size_t) 0 * nb;
+        const block_q8_0 * y1 = rhs.data() + (size_t) 1 * nb;
+        const block_q8_0 * y2 = rhs.data() + (size_t) 2 * nb;
+        const block_q8_0 * y3 = rhs.data() + (size_t) 3 * nb;
+        for (int r = 0; r < rows; ++r) {
+            float out[4];
+            const block_q4_0 * x = weights.data() + (size_t) r * nb;
+            q4_0_q8_0_dot_t4_rvv(n, out, x, y0, y1, y2, y3);
+            sink += (out[0] + out[1] + out[2] + out[3]) * 0.0000001f;
+        }
+        const double t1 = seconds_now();
+        if (iter >= warmup) {
+            total_ns += (t1 - t0) * 1.0e9;
+        }
+    }
+    return total_ns / repeats;
+}
+
+int main(int argc, char ** argv) {
+    int n = 11008;
+    int rows = 512;
+    int repeats = 5;
+    int warmup = 1;
+
+    if (argc > 1) {
+        n = std::atoi(argv[1]);
+    }
+    if (argc > 2) {
+        rows = std::atoi(argv[2]);
+    }
+    if (argc > 3) {
+        repeats = std::atoi(argv[3]);
+    }
+
+    if (n <= 0 || rows <= 0 || repeats <= 0 || n % QK4_0 != 0 || n % QK8_0 != 0) {
+        std::fprintf(stderr, "bad args: n=%d rows=%d repeats=%d\n", n, rows, repeats);
+        return 2;
+    }
+
+    const int nb = n / QK4_0;
+
+    std::vector<block_q4_0> weights((size_t) rows * nb);
+    std::vector<block_q8_0> rhs((size_t) 4 * nb);
+    std::vector<float> tmp((size_t) n);
+    volatile float sink = 0.0f;
+
+    for (int r = 0; r < rows; ++r) {
+        fill_float(tmp, 17 + r * 13);
+        quantize_row_q4_0(tmp.data(), weights.data() + (size_t) r * nb, n);
+    }
+
+    for (int t = 0; t < 4; ++t) {
+        fill_float(tmp, 1009 + t * 29);
+        quantize_row_q8_0(tmp.data(), rhs.data() + (size_t) t * nb, n);
+    }
+
+    double max_abs = 0.0;
+    double max_rel = 0.0;
+    for (int r = 0; r < rows; ++r) {
+        const block_q4_0 * x = weights.data() + (size_t) r * nb;
+        float oldv[4];
+        for (int t = 0; t < 4; ++t) {
+            const block_q8_0 * y = rhs.data() + (size_t) t * nb;
+            ggml_vec_dot_q4_0_q8_0(n, &oldv[t], 0, x, 0, y, 0, 1);
+        }
+        float newv[4];
+        q4_0_q8_0_dot_t4_rvv(n, newv, x,
+                             rhs.data() + (size_t) 0 * nb,
+                             rhs.data() + (size_t) 1 * nb,
+                             rhs.data() + (size_t) 2 * nb,
+                             rhs.data() + (size_t) 3 * nb);
+        for (int t = 0; t < 4; ++t) {
+            const double diff = std::fabs((double) oldv[t] - (double) newv[t]);
+            const double denom = std::fabs((double) oldv[t]) + 1.0e-9;
+            max_abs = std::fmax(max_abs, diff);
+            max_rel = std::fmax(max_rel, diff / denom);
+        }
+    }
+
+    const double old_t1_ns = bench_old_t1(n, rows, repeats, warmup, weights, rhs, nb, sink);
+    const double old_t4_ns = bench_old_t4(n, rows, repeats, warmup, weights, rhs, nb, sink);
+    const double new_t4_ns = bench_new_t4(n, rows, repeats, warmup, weights, rhs, nb, sink);
+
+    std::printf("metric,n,rows,repeats,avg_ns,avg_ms,ratio_vs_old_t1,ratio_vs_old_t4,max_abs,max_rel\n");
+    std::printf("old_t1,%d,%d,%d,%.0f,%.3f,%.3f,%.3f,%.9g,%.9g\n",
+                n, rows, repeats, old_t1_ns, old_t1_ns / 1.0e6, 1.0, old_t1_ns / old_t4_ns, max_abs, max_rel);
+    std::printf("old_t4,%d,%d,%d,%.0f,%.3f,%.3f,%.3f,%.9g,%.9g\n",
+                n, rows, repeats, old_t4_ns, old_t4_ns / 1.0e6, old_t4_ns / old_t1_ns, 1.0, max_abs, max_rel);
+    std::printf("new_t4,%d,%d,%d,%.0f,%.3f,%.3f,%.3f,%.9g,%.9g\n",
+                n, rows, repeats, new_t4_ns, new_t4_ns / 1.0e6, new_t4_ns / old_t1_ns, new_t4_ns / old_t4_ns, max_abs, max_rel);
+
+    if (max_abs > 1.0e-4 || max_rel > 1.0e-5) {
+        std::fprintf(stderr, "correctness failed: max_abs=%g max_rel=%g\n", max_abs, max_rel);
+        return 4;
+    }
+
+    if (std::isnan((float) sink)) {
+        std::fprintf(stderr, "sink is nan\n");
+        return 3;
+    }
+
+    return 0;
+}

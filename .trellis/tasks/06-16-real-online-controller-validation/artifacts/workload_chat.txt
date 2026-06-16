@@ -1,0 +1,50 @@
+User: I changed the validator yesterday and the output looks unstable.
+Assistant: The first thing I would check is whether the input window changed.
+User: It did, but the symptom only appears after long answers.
+Assistant: Keep the old prompt fixed and compare one variable at a time.
+User: The examples are different every run.
+Assistant: That suggests the sampling seed or the draft path is not pinned.
+User: Can we make the report shorter?
+Assistant: Yes. Keep only the measured facts, the caveat, and the next action.
+User: The remote run finished but the output did not include the marker.
+Assistant: Check whether the flag was passed to the process that actually executed the benchmark.
+User: The shell script set the flag before calling timeout.
+Assistant: Then inspect stdout and stderr separately because the trace may be printed at process exit.
+User: The model load takes a long time.
+Assistant: Keep the next run short and avoid changing more than one parameter.
+User: The first workload did not draft any tokens.
+Assistant: That is still useful because it shows a low acceptance case.
+User: The second workload repeats many lines.
+Assistant: Then it should be separated from chat and treated as a structured or code case.
+User: I need the table to be honest.
+Assistant: Label aggregate traces separately from per-step traces.
+User: The controller should not switch too often.
+Assistant: Add a margin and a minimum dwell window.
+User: The fixed draft baseline is strong.
+Assistant: Compare against best fixed mixed and best fixed per workload.
+User: The oracle score is lower than our policy.
+Assistant: That is expected when the oracle has future knowledge and uses the same cost ratio.
+User: The previous calculation averaged per-position ratios.
+Assistant: Replace it with total cost divided by total emitted tokens.
+User: The report should say what failed.
+Assistant: Preserve failed smoke runs and explain the exact failure mode.
+User: I do not want to damage the shared machine.
+Assistant: Use one process, one thread, low priority, and a timeout.
+User: Should we run a large sweep now?
+Assistant: No. First prove that the trace path produces the fields we need.
+User: What if the full model is too slow?
+Assistant: Use lookup-stats or replay traces as a controlled precursor.
+User: What if the acceptance drift disappears?
+Assistant: Then the controller claim weakens and the paper should focus on curve shaping.
+User: What if only structured output benefits?
+Assistant: Then the workload scope must be stated precisely.
+User: What is the next concrete action?
+Assistant: Collect enough trace evidence to decide whether online control is worth integrating.
+User: I changed the validator yesterday and the output looks unstable.
+Assistant: The first thing I would check is whether the input window changed.
+User: It did, but the symptom only appears after long answers.
+Assistant: Keep the old prompt fixed and compare one variable at a time.
+User: The examples are different every run.
+Assistant: That suggests the sampling seed or the draft path is not pinned.
+User: Can we make the report shorter?
+Assistant: Yes. Keep only the measured facts, the caveat, and the next action.

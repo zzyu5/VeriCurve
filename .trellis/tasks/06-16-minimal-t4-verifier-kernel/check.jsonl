@@ -1,0 +1,12 @@
+{"file": ".trellis/spec/project/paper-claims.md", "reason": "Check that claims are classified as measured, inferred, hypothesis, or fallback."}
+{"file": ".trellis/spec/llamacpp-rvv/current-path-audit.md", "reason": "Check path classification and trace artifacts."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Check remote work stayed within shared-host safety limits."}
+{"file": ".trellis/spec/curve-system/profiler.md", "reason": "Check ggml-level C_old(T) result format and fields."}
+{"file": ".trellis/spec/curve-system/kernel-design.md", "reason": "Check T4 correctness/performance thresholds if implementation happens."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Check final labels match explicit criteria."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Check metadata, raw outputs, parsed results, and patch artifacts are preserved."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/prd.md", "reason": "Check task completion against explicit acceptance criteria."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/current_path_trace_T1_T2_T4_T8.md", "reason": "Check trace evidence supports the path label."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/C_old_qmatmul_T_threads1.md", "reason": "Check old-curve gate result."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/C_new_T4_microbench.md", "reason": "Check minimal T4 correctness and performance thresholds."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/final_go_nogo.md", "reason": "Check final Go/No-Go label against the evidence chain."}

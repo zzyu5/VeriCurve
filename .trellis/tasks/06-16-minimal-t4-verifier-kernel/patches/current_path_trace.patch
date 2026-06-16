@@ -1,0 +1,154 @@
+diff --git a/ggml/src/ggml-cpu/arch/riscv/quants.c b/ggml/src/ggml-cpu/arch/riscv/quants.c
+index 47e9180..e05d51e 100644
+--- a/ggml/src/ggml-cpu/arch/riscv/quants.c
++++ b/ggml/src/ggml-cpu/arch/riscv/quants.c
+@@ -29,6 +29,47 @@
+ 
+ #define UNUSED GGML_UNUSED
+ 
++static int vc_trace_enabled_cached = -1;
++static long long vc_trace_q4_0_q8_0_calls = 0;
++static int vc_trace_q4_0_q8_0_last_n = 0;
++static int vc_trace_q4_0_q8_0_last_nrc = 0;
++static size_t vc_trace_q4_0_q8_0_last_bs = 0;
++
++static int vc_trace_enabled(void) {
++    if (vc_trace_enabled_cached < 0) {
++        const char * env = getenv("GGML_VERICURVE_TRACE");
++        vc_trace_enabled_cached = env && env[0] && env[0] != '0';
++    }
++    return vc_trace_enabled_cached;
++}
++
++static void vc_trace_dump(void) {
++    if (!vc_trace_enabled() || vc_trace_q4_0_q8_0_calls == 0) {
++        return;
++    }
++    fprintf(stderr,
++            "VERICURVE_TRACE,function=ggml_vec_dot_q4_0_q8_0,call_count=%lld,last_n=%d,last_bs=%zu,last_nrc=%d\n",
++            vc_trace_q4_0_q8_0_calls,
++            vc_trace_q4_0_q8_0_last_n,
++            vc_trace_q4_0_q8_0_last_bs,
++            vc_trace_q4_0_q8_0_last_nrc);
++}
++
++static void vc_trace_vec_dot_q4_0_q8_0(int n, size_t bs, int nrc) {
++    if (!vc_trace_enabled()) {
++        return;
++    }
++    static int registered = 0;
++    if (!registered) {
++        atexit(vc_trace_dump);
++        registered = 1;
++    }
++    vc_trace_q4_0_q8_0_calls++;
++    vc_trace_q4_0_q8_0_last_n = n;
++    vc_trace_q4_0_q8_0_last_bs = bs;
++    vc_trace_q4_0_q8_0_last_nrc = nrc;
++}
++
+ void quantize_row_q8_0(const float * GGML_RESTRICT x, void * GGML_RESTRICT vy, int64_t k) {
+     assert(QK8_0 == 32);
+     assert(k % QK8_0 == 0);
+@@ -220,6 +261,7 @@ void quantize_row_q8_K(const float * GGML_RESTRICT x, void * GGML_RESTRICT y, in
+ //===================================== Dot products =================================
+ 
+ void ggml_vec_dot_q4_0_q8_0(int n, float * GGML_RESTRICT s, size_t bs, const void * GGML_RESTRICT vx, size_t bx, const void * GGML_RESTRICT vy, size_t by, int nrc) {
++    vc_trace_vec_dot_q4_0_q8_0(n, bs, nrc);
+ #if defined(__riscv_v)
+     const int qk = QK8_0;
+     const int nb = n / qk;
+diff --git a/ggml/src/ggml-cpu/repack.cpp b/ggml/src/ggml-cpu/repack.cpp
+index f18758f..51762ae 100644
+--- a/ggml/src/ggml-cpu/repack.cpp
++++ b/ggml/src/ggml-cpu/repack.cpp
+@@ -15,6 +15,7 @@
+ #include <cstring>
+ #include <cassert>
+ #include <cstdio>  // for GGML_ASSERT
++#include <cstdlib>
+ 
+ #include "repack.h"
+ 
+@@ -24,6 +25,65 @@
+ 
+ #define UNUSED GGML_UNUSED
+ 
++struct vc_repack_trace_counter {
++    const char * name;
++    long long calls;
++    int last_n;
++    size_t last_bs;
++    int last_nr;
++    int last_nc;
++};
++
++static int vc_repack_trace_enabled_cached = -1;
++static vc_repack_trace_counter vc_trace_gemv_q4_0_16x1_q8_0 = {"ggml_gemv_q4_0_16x1_q8_0", 0, 0, 0, 0, 0};
++static vc_repack_trace_counter vc_trace_gemm_q4_0_16x1_q8_0 = {"ggml_gemm_q4_0_16x1_q8_0", 0, 0, 0, 0, 0};
++
++static int vc_repack_trace_enabled() {
++    if (vc_repack_trace_enabled_cached < 0) {
++        const char * env = std::getenv("GGML_VERICURVE_TRACE");
++        vc_repack_trace_enabled_cached = env && env[0] && env[0] != '0';
++    }
++    return vc_repack_trace_enabled_cached;
++}
++
++static void vc_repack_trace_dump_one(const vc_repack_trace_counter & c) {
++    if (c.calls == 0) {
++        return;
++    }
++    std::fprintf(stderr,
++                 "VERICURVE_TRACE,function=%s,call_count=%lld,last_n=%d,last_bs=%zu,last_nr=%d,last_nc=%d\n",
++                 c.name,
++                 c.calls,
++                 c.last_n,
++                 c.last_bs,
++                 c.last_nr,
++                 c.last_nc);
++}
++
++static void vc_repack_trace_dump() {
++    if (!vc_repack_trace_enabled()) {
++        return;
++    }
++    vc_repack_trace_dump_one(vc_trace_gemv_q4_0_16x1_q8_0);
++    vc_repack_trace_dump_one(vc_trace_gemm_q4_0_16x1_q8_0);
++}
++
++static void vc_repack_trace_count(vc_repack_trace_counter & c, int n, size_t bs, int nr, int nc) {
++    if (!vc_repack_trace_enabled()) {
++        return;
++    }
++    static int registered = 0;
++    if (!registered) {
++        std::atexit(vc_repack_trace_dump);
++        registered = 1;
++    }
++    c.calls++;
++    c.last_n = n;
++    c.last_bs = bs;
++    c.last_nr = nr;
++    c.last_nc = nc;
++}
++
+ static inline int nearest_int(float fval) {
+     assert(fabsf(fval) <= 4194303.f);
+     float val = fval + 12582912.f;
+@@ -4033,6 +4093,7 @@ template <> void gemv<block_q8_0, 8, 4, GGML_TYPE_Q8_0>(int n, float * s, size_t
+ 
+ #if defined __riscv_zvfh
+ template <> void gemv<block_q4_0, 1, 16, GGML_TYPE_Q8_0>(int n, float * s, size_t bs, const void * vx, const void * vy, int nr, int nc) {
++    vc_repack_trace_count(vc_trace_gemv_q4_0_16x1_q8_0, n, bs, nr, nc);
+     ggml_gemv_q4_0_16x1_q8_0(n, s, bs, vx, vy, nr, nc);
+ }
+ 
+@@ -4130,6 +4191,7 @@ template <> void gemm<block_q8_0, 8, 4, GGML_TYPE_Q8_0>(int n, float * s, size_t
+ 
+ #if defined __riscv_zvfh
+ template <> void gemm<block_q4_0, 1, 16, GGML_TYPE_Q8_0>(int n, float * s, size_t bs, const void * vx, const void * vy, int nr, int nc) {
++    vc_repack_trace_count(vc_trace_gemm_q4_0_16x1_q8_0, n, bs, nr, nc);
+     ggml_gemm_q4_0_16x1_q8_0(n, s, bs, vx, vy, nr, nc);
+ }
+ 

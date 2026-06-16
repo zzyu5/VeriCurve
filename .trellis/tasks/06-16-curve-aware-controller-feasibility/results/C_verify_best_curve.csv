@@ -1,0 +1,6 @@
+T,C_verify_old_ns,C_verify_old_ms,C_verify_new_ns,C_verify_new_ms,C_verify_best_ns,C_verify_best_ms,winner_variant,ratio_best_vs_T1,old_curve_method,new_curve_method
+1,12024312,12.024,21020664,21.021,12024312,12.024,old_vecdot_nrc1,1.0,same_RTile_harness_absolute,measured_R8_matrix_or_layout
+2,24036600,24.037,25617788,25.618,24036600,24.037,old_vecdot_nrc1,1.999,same_T1_scaled_by_fresh_old_qmatmul_ratio,measured_R8_matrix_or_layout
+4,48085457,48.085,16825821,16.826,16825821,16.826,R8_rowblocked_weights_total,1.399317,same_RTile_harness_absolute,measured_R8_matrix_or_layout
+8,96062229,96.062,41537071,41.537,41537071,41.537,R8_no_pack,3.454424,same_T1_scaled_by_fresh_old_qmatmul_ratio,measured_R8_matrix_or_layout
+16,192028263,192.028,83074142,83.074,83074142,83.074,two_R8T8_no_pack_tiles_composed,6.908848,same_T1_scaled_by_fresh_old_qmatmul_ratio,composed_estimate_from_two_measured_R8T8_tiles

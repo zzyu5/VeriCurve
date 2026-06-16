@@ -1,0 +1,18 @@
+{"file": ".trellis/spec/project/positioning.md", "reason": "Keep the task aligned with curve-shaping verifier kernels rather than a broad scheduler."}
+{"file": ".trellis/spec/project/scope.md", "reason": "Use the gate order and non-goals for this task."}
+{"file": ".trellis/spec/project/paper-claims.md", "reason": "Avoid overstating current path, T4, or system claims."}
+{"file": ".trellis/spec/llamacpp-rvv/current-path-audit.md", "reason": "Defines trace contract and current-path classification."}
+{"file": ".trellis/spec/llamacpp-rvv/runtime-boundary.md", "reason": "Limits llama.cpp touch points to trace, harness, and minimal kernel work."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Required policy for shared rvv work."}
+{"file": ".trellis/spec/curve-system/profiler.md", "reason": "Defines ggml-level C_old(T) microbenchmark requirements."}
+{"file": ".trellis/spec/curve-system/kernel-design.md", "reason": "Defines minimal T4 API shape and Go/No-Go thresholds."}
+{"file": ".trellis/spec/curve-system/controller.md", "reason": "Explains why controller work is gated behind C_new/C_draft/acceptance."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Defines stage labels and experiment gates."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Defines required metadata and artifact paths."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/pro_guidance_summary.md", "reason": "Condensed pro guidance for this task."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/C_old_prompt_T_rvv_threads1.md", "reason": "Previous prompt-pass old-curve evidence used as baseline."}
+{"file": ".trellis/tasks/06-16-go-nogo-llamacpp-rvv-verifier-curve/research/go_nogo_preliminary.md", "reason": "Previous Go/No-Go labels and next-task rationale."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/current_path_trace_T1_T2_T4_T8.md", "reason": "Task 1 trace evidence for current path classification."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/C_old_qmatmul_T_threads1.md", "reason": "Task 2 ggml-level old-curve evidence."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/C_new_T4_microbench.md", "reason": "Task 3 minimal T4 correctness/performance evidence."}
+{"file": ".trellis/tasks/06-16-minimal-t4-verifier-kernel/research/final_go_nogo.md", "reason": "Final task label and consequence."}

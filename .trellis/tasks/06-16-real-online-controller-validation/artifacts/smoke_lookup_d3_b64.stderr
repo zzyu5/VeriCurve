@@ -1,0 +1,27 @@
+0.00.019.611 I common_init_result: fitting params to device memory ...
+0.00.019.628 I common_init_result: (for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)
+0.00.528.057 I common_params_fit_impl: projected to use 3787 MiB of host memory vs. 124574 MiB of total host memory
+0.02.266.599 W llama_context: n_ctx_seq (256) < n_ctx_train (4096) -- the full capacity of the model will not be utilized
+0.02.522.690 I common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+2.22.744.545 I encoded   16 tokens in   84.914 seconds, speed:    0.294 t/s
+2.22.744.553 I decoded    9 tokens in   43.387 seconds, speed:    0.207 t/s
+2.22.744.555 I 
+2.22.744.556 I n_draft      = 3
+2.22.744.558 I n_predict    = 9
+2.22.744.559 I n_drafted    = 0
+2.22.744.562 I t_draft_flat = 0.08 ms
+2.22.744.565 I t_draft      = 0.26 ms, inf us per token, 0.00 tokens per second
+2.22.744.565 I n_accept     = 0
+2.22.744.567 I accept       = nan%
+2.22.744.568 I 
+target:
+
+2.22.744.579 I common_perf_print:    sampling time =       2.60 ms
+2.22.744.582 I common_perf_print:    samplers time =       0.66 ms /     9 tokens
+2.22.744.591 I common_perf_print:        load time =   13727.13 ms
+2.22.744.599 I common_perf_print: prompt eval time =   84914.11 ms /    16 tokens ( 5307.13 ms per token,     0.19 tokens per second)
+2.22.744.603 I common_perf_print:        eval time =   43383.58 ms /     8 runs   ( 5422.95 ms per token,     0.18 tokens per second)
+2.22.744.605 I common_perf_print:       total time =  128302.12 ms /    24 tokens
+2.22.744.608 I common_perf_print: unaccounted time =       1.83 ms /   0.0 %      (total - sampling - prompt eval - eval) / (total)
+2.22.744.609 I common_perf_print:    graphs reused =          8
+VERICURVE_TRACE,function=ggml_vec_dot_q4_0_q8_0,call_count=34964992,last_n=11008,last_bs=0,last_nrc=1

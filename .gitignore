@@ -1,0 +1,12 @@
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Temporary files
+*.tmp
+*.new
+.backup-*/
+
+# Local editor / OS noise
+.DS_Store
+*~

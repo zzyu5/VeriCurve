@@ -1,0 +1,45 @@
+Context: The verifier curve maps token width to target cost.
+Question: What does the curve measure?
+Answer: The curve measures verifier cost for a target token width.
+Context: The verifier curve maps token width to target cost.
+Question: Why is the curve useful?
+Answer: The curve lets the runtime choose a draft budget.
+Context: The verifier curve maps token width to target cost.
+Question: What changes the curve?
+Answer: A row blocked verifier kernel changes the curve.
+Context: The verifier curve maps token width to target cost.
+Question: What does the curve measure?
+Answer: The curve measures verifier cost for a target token width.
+Context: The verifier curve maps token width to target cost.
+Question: Why is the curve useful?
+Answer: The curve lets the runtime choose a draft budget.
+Context: The verifier curve maps token width to target cost.
+Question: What changes the curve?
+Answer: A row blocked verifier kernel changes the curve.
+Context: The verifier curve maps token width to target cost.
+Question: What does the curve measure?
+Answer: The curve measures verifier cost for a target token width.
+Context: The verifier curve maps token width to target cost.
+Question: Why is the curve useful?
+Answer: The curve lets the runtime choose a draft budget.
+Context: The verifier curve maps token width to target cost.
+Question: What changes the curve?
+Answer: A row blocked verifier kernel changes the curve.
+Context: The verifier curve maps token width to target cost.
+Question: What does the curve measure?
+Answer: The curve measures verifier cost for a target token width.
+Context: The verifier curve maps token width to target cost.
+Question: Why is the curve useful?
+Answer: The curve lets the runtime choose a draft budget.
+Context: The verifier curve maps token width to target cost.
+Question: What changes the curve?
+Answer: A row blocked verifier kernel changes the curve.
+Context: The verifier curve maps token width to target cost.
+Question: What does the curve measure?
+Answer: The curve measures verifier cost for a target token width.
+Context: The verifier curve maps token width to target cost.
+Question: Why is the curve useful?
+Answer: The curve lets the runtime choose a draft budget.
+Context: The verifier curve maps token width to target cost.
+Question: What changes the curve?
+Answer: A row blocked verifier kernel changes the curve.

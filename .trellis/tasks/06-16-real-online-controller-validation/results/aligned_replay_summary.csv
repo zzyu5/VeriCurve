@@ -1,0 +1,10 @@
+baseline,ms_per_token,relative_to_fixed_d3,oracle_reach,total_cost_ms,total_tokens,choices,notes
+B0_no_speculation,12.024,1.17331,0.637559,18709.344,1556,d0=1556,aligned_replay
+B1_fixed_d1,19.044482,1.858373,0.402532,37403.362,1964,d1=1556,aligned_replay
+B2_fixed_d3,10.247931,1.0,0.748055,26183.463,2555,d3=1556,aligned_replay
+B3_fixed_d7,19.100166,1.863807,0.401358,64634.961,3384,d7=1556,aligned_replay
+B4_offline_best_fixed_mixed,10.247931,1.0,0.748055,26183.463,2555,d3=1556,best fixed d=3 over pooled aligned trace
+B5_offline_best_fixed_per_workload,8.914029,0.869837,0.859994,21010.367,2357,d0=1077;d3=479,best fixed d per workload
+B6_goodput_only,19.100166,1.863807,0.401358,64634.961,3384,d7=1556,per step choose max accepted_count ignoring cost
+B7_Vericurve_EWMA_full_info,9.034761,0.881618,0.848502,21313.002,2359,d0=1014;d3=542,upper bound: updates all candidate EWMAs from aligned trace
+B8_oracle,7.666012,0.748055,1.0,25167.516,3283,d0=1148;d3=226;d7=182,per step oracle with total cost / total tokens objective

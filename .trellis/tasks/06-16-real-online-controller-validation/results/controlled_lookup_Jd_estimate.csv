@@ -1,0 +1,16 @@
+workload,d,T,C_verify_best_ms,winner_variant,E_accept_est,C_draft_est_per_round_ms,J_est_ms_per_token,method
+chat_low,1,2,24.037,old_vecdot_nrc1,0.8,0.0296,13.370333,aggregate_lookup_stats_estimate
+chat_low,3,4,16.826,R8_rowblocked_weights_total,1.663366,0.044554455,6.334297,aggregate_lookup_stats_estimate
+chat_low,7,8,41.537,R8_no_pack,2.301105,0.080828729,12.607242,aggregate_lookup_stats_estimate
+chat,1,2,24.037,old_vecdot_nrc1,0.813333,0.0256,13.269816,aggregate_lookup_stats_estimate
+chat,3,4,16.826,R8_rowblocked_weights_total,1.508772,0.035263158,6.720923,aggregate_lookup_stats_estimate
+chat,7,8,41.537,R8_no_pack,2.234043,0.054113475,12.86041,aggregate_lookup_stats_estimate
+code,1,2,24.037,old_vecdot_nrc1,0.982833,0.002961373,12.12405,aggregate_lookup_stats_estimate
+code,3,4,16.826,R8_rowblocked_weights_total,2.883008,0.006768802,4.334981,aggregate_lookup_stats_estimate
+code,7,8,41.537,R8_no_pack,6.395455,0.013840909,5.61843,aggregate_lookup_stats_estimate
+rag,1,2,24.037,old_vecdot_nrc1,0.923077,0.003803419,12.501218,aggregate_lookup_stats_estimate
+rag,3,4,16.826,R8_rowblocked_weights_total,2.475578,0.007403599,4.843339,aggregate_lookup_stats_estimate
+rag,7,8,41.537,R8_no_pack,4.472222,0.012638889,7.592827,aggregate_lookup_stats_estimate
+structured,1,2,24.037,old_vecdot_nrc1,0.844037,0.005137615,13.037776,aggregate_lookup_stats_estimate
+structured,3,4,16.826,R8_rowblocked_weights_total,2.045455,0.009242424,5.52799,aggregate_lookup_stats_estimate
+structured,7,8,41.537,R8_no_pack,3.225904,0.017289157,9.833232,aggregate_lookup_stats_estimate

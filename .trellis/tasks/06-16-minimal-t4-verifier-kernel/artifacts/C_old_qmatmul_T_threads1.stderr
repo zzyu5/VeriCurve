@@ -1,0 +1,1 @@
+VERICURVE_TRACE,function=ggml_vec_dot_q4_0_q8_0,call_count=95232,last_n=11008,last_bs=0,last_nrc=1

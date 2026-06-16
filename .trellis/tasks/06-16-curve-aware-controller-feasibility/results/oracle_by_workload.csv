@@ -1,0 +1,6 @@
+workload,common_positions,oracle_total_cost_ms,oracle_total_tokens,oracle_J_new_ms,oracle_choices,method
+chat,87,1084.725208,97,11.182734,ngram-mod:d3=8;none:d0=79,fractional_total_cost_over_total_tokens_common_positions
+code,57,893.171711,173,5.162842,ngram-map:d3=29;ngram-mod:d3=13;ngram-simple:d3=1;none:d0=14,fractional_total_cost_over_total_tokens_common_positions
+rag,72,1442.704689,226,6.383649,ngram-map:d3=7;ngram-map:d7=13;ngram-map:d15=1;ngram-mod:d3=12;ngram-mod:d7=1;none:d0=38,fractional_total_cost_over_total_tokens_common_positions
+structured,80,1525.619023,253,6.030115,ngram-map:d3=35;ngram-map:d15=5;ngram-mod:d3=8;none:d0=32,fractional_total_cost_over_total_tokens_common_positions
+mixed,365,7740.788515,1174,6.593517,ngram-mod:d3=69;ngram-mod:d7=49;ngram-mod:d15=22;ngram-simple:d3=1;none:d0=224,fractional_total_cost_over_total_tokens_common_positions

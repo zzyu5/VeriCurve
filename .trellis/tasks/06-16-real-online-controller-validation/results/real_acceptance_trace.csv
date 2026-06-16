@@ -1,0 +1,16 @@
+workload,draft_source,d,requested_T,status,n_predict,n_drafted,n_accept,acceptance_per_draft_token,rounds_est,E_accept_est,t_draft_total_ms,C_draft_est_per_round_ms,method,notes
+chat_low,llama_lookup_stats_ngram,1,2,0,768,100,80,0.8,100.0,0.8,2.96,0.0296,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+chat_low,llama_lookup_stats_ngram,3,4,0,768,202,112,0.554455,67.333333,1.663366,3.0,0.044554455,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+chat_low,llama_lookup_stats_ngram,7,8,0,768,362,119,0.328729,51.714286,2.301105,4.18,0.080828729,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+chat,llama_lookup_stats_ngram,1,2,0,512,75,61,0.813333,75.0,0.813333,1.92,0.0256,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+chat,llama_lookup_stats_ngram,3,4,0,512,171,86,0.502924,57.0,1.508772,2.01,0.035263158,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+chat,llama_lookup_stats_ngram,7,8,0,512,282,90,0.319149,40.285714,2.234043,2.18,0.054113475,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+code,llama_lookup_stats_ngram,1,2,0,512,233,229,0.982833,233.0,0.982833,0.69,0.002961373,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+code,llama_lookup_stats_ngram,3,4,0,512,359,345,0.961003,119.666667,2.883008,0.81,0.006768802,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+code,llama_lookup_stats_ngram,7,8,0,512,440,402,0.913636,62.857143,6.395455,0.87,0.013840909,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+rag,llama_lookup_stats_ngram,1,2,0,512,234,216,0.923077,234.0,0.923077,0.89,0.003803419,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+rag,llama_lookup_stats_ngram,3,4,0,512,389,321,0.825193,129.666667,2.475578,0.96,0.007403599,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+rag,llama_lookup_stats_ngram,7,8,0,512,576,368,0.638889,82.285714,4.472222,1.04,0.012638889,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+structured,llama_lookup_stats_ngram,1,2,0,256,109,92,0.844037,109.0,0.844037,0.56,0.005137615,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+structured,llama_lookup_stats_ngram,3,4,0,256,198,135,0.681818,66.0,2.045455,0.61,0.009242424,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
+structured,llama_lookup_stats_ngram,7,8,0,256,332,153,0.460843,47.428571,3.225904,0.82,0.017289157,llama_lookup_stats_controlled_aggregate,aggregate-only; rounds_est assumes each draft round requested d tokens
