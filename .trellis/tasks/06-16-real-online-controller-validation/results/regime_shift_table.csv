@@ -1,0 +1,6 @@
+workload,old_curve_best_d,new_curve_best_d,old_curve_best_ms_per_token,new_curve_best_ms_per_token,fixed_d3_cost_old,fixed_d3_cost_new,no_spec_cost,new_vs_old_best_speedup,policy_interpretation
+chat,0,0,12.024259,12.024259,39.978049,13.990175,12.024259,1.0,low_acceptance_stays_no_spec
+chat_low,0,0,12.024281,12.024281,41.046454,14.363935,12.024281,1.0,low_acceptance_stays_no_spec
+code,0,3,12.024259,5.488916,15.684723,5.488916,12.024259,2.190644,regime_shift_to_speculation
+rag,0,3,12.024267,6.277709,17.938781,6.277709,12.024267,1.915391,regime_shift_to_speculation
+structured,0,3,12.024255,7.953855,22.728617,7.953855,12.024255,1.511752,regime_shift_to_speculation

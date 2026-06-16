@@ -10,6 +10,22 @@ yet a full-system result. This task determines whether real llama.cpp acceptance
 behavior and an online EWMA decision policy can promote the controller from
 `CONDITIONAL PAPER GO` to `FULL SYSTEM GO`.
 
+Current critique-resolution update:
+
+```text
+Final paper version: B. Curve-shaping systems paper
+Curve-shaping beyond kernel speedup: GO
+Two-action vs multi-point controller: TWO-ACTION
+Selected-only controller: CONDITIONAL
+Goodput-only comparison: TIE
+Robustness: SCOPED
+```
+
+The paper should not currently be framed as a strong controller-algorithm
+paper. The safe mainline is verifier cost-curve shaping plus policy-regime
+shift, with a simple selected-only `{d=0,d=3}` curve-gated policy as conditional
+support.
+
 ## Inherited State
 
 Previous status:
@@ -232,6 +248,23 @@ research/commit_aware_replay.md
 research/two_action_policy_replay.md
 results/commit_aware_train_test.csv
 research/commit_aware_train_test.md
+doc/VeriCurve-RV-Claude-Critique-Resolution-GoNoGo.md
+scripts/resolve_claude_critique.py
+results/regime_shift_table.csv
+research/regime_shift_analysis.md
+results/d_action_value.csv
+research/two_action_or_multipoint.md
+results/selected_only_policy_summary.csv
+results/selected_only_policy_trace.csv
+research/selected_only_policy.md
+results/goodput_baseline_comparison.csv
+research/goodput_baseline_comparison.md
+results/curve_robustness_matrix.csv
+research/curve_robustness.md
+results/final_decision_matrix.csv
+research/claude_critique_resolution_final.md
+results/remote_claude_critique/rtile_ttile_rows128_r3.csv
+results/remote_claude_critique/rtile_ttile_rows2048_r3.csv
 ```
 
 If a full artifact cannot be produced safely in this task, create the best

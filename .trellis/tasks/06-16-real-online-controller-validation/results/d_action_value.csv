@@ -1,0 +1,7 @@
+scope,two_action_oracle_ms_per_token,multi_action_oracle_ms_per_token,multi_vs_two_oracle_gain_pct,two_action_oracle_choices,multi_action_oracle_choices,two_action_best_fixed_d,two_action_best_fixed_ms_per_token,multi_action_best_fixed_d,multi_action_best_fixed_ms_per_token,fixed_d0_ms_per_token,fixed_d1_ms_per_token,fixed_d3_ms_per_token,fixed_d7_ms_per_token,d1_or_d7_selected_by_oracle,d7_failure_reason
+mixed,8.090088,8.090088,0.0,d0=1148;d3=408,d0=1148;d3=408,3,10.248179,3,10.248179,12.024267,17.654743,10.248179,23.142378,False,T8_verify_cost_dominates
+chat,10.524435,10.524435,0.0,d0=368;d3=56,d0=368;d3=56,0,12.024259,0,12.024259,12.024259,21.163647,13.990175,34.222947,False,T8_verify_cost_dominates
+chat_low,10.640775,10.640775,0.0,d0=593;d3=60,d0=593;d3=60,0,12.024281,0,12.024281,12.024281,21.525051,14.363935,35.07721,False,T8_verify_cost_dominates
+code,5.02923,5.02923,0.0,d0=49;d3=118,d0=49;d3=118,3,5.488916,3,5.488916,12.024259,13.244649,5.488916,8.924721,False,T8_verify_cost_dominates
+rag,5.630443,5.630443,0.0,d0=69;d3=122,d0=69;d3=122,3,6.277709,3,6.277709,12.024267,13.897209,6.277709,11.683266,False,T8_verify_cost_dominates
+structured,6.659242,6.659242,0.0,d0=69;d3=52,d0=69;d3=52,3,7.953855,3,7.953855,12.024255,15.399586,7.953855,16.713426,False,T8_verify_cost_dominates

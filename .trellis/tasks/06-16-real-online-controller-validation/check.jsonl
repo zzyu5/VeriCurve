@@ -9,3 +9,4 @@
 {"file": ".trellis/spec/llamacpp-rvv/runtime-boundary.md", "reason": "Validate llama.cpp changes are narrow and disableable."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/replay_correctness_audit.md", "reason": "Check selected-only claims are blocked when trace coverage is insufficient."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/commit_aware_replay.md", "reason": "Check pro7 selected-only replay claims and remaining full-system blockers."}
+{"file": ".trellis/spec/project/paper-claims.md", "reason": "Spec updated with current paper claim boundary."}

@@ -1,0 +1,7 @@
+axis,status,evidence,interpretation
+A. Curve-shaping beyond kernel speedup,GO,regime shift present and low-acceptance no-spec preserved,"new curve changes policy viability, not only kernel latency"
+B. Two-action vs multi-point controller,TWO-ACTION,multi_vs_two_oracle_gain_pct=0.000; choices=d0=1148;d3=408,d=1/d=7 add little value; frame as curve-gated speculation
+C. Selected-only controller,CONDITIONAL,best_curve=vericurve_selected_t0.4_p16 speedup_vs_fixed_d3=12.889% oracle_reach=0.891,selected-only replay is useful but not full runtime GO unless oracle/overhead gates pass
+D. Goodput-only comparison,TIE,curve_ms=9.078115 goodput_ms=9.160689 curve_advantage_vs_goodput=0.910%,controller novelty weak if selected-only goodput matches curve-aware
+E. Robustness across model/quant/working-set,SCOPED,core rows512 ratio <=1.8; rows2048_ratio=2.839_WEAK_ratio_gt_2.5; no cross-quant/real-layer shaped case yet,scope paper to measured Q4_0xQ8_0 rows512 unless remote robustness is extended
+Final paper version,B. Curve-shaping systems paper,derived from A-E gates,recommended next action: fill robustness gaps and present controller as conditional unless goodput/runtime gates improve

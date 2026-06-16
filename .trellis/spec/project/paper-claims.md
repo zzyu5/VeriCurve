@@ -29,3 +29,35 @@ Use precise language:
 
 Do not present a planned kernel or controller as already validated.
 
+## Current Claim Boundary: Claude Critique Resolution
+
+As of task `.trellis/tasks/06-16-real-online-controller-validation`, the safe
+paper version is:
+
+```text
+Version B: curve-shaping systems paper
+```
+
+Allowed current claim:
+
+```text
+RTile x TTile RVV verification reshapes C_verify(T), and the shaped curve
+changes speculation viability: code/rag/structured shift from old-curve
+best d=0 to shaped-curve best d=3, while chat/chat_low remain d=0.
+```
+
+Required phrasing:
+
+```text
+curve-gated speculation over {d=0,d=3}
+```
+
+Avoid current overclaims:
+
+- Do not call the current controller a strong new adaptive algorithm.
+- Do not claim multi-point control over `d={0,1,3,7}`; oracle gain from adding
+  `d=1,d=7` is currently `0.000%`.
+- Do not claim curve-aware selected-only control beats goodput-only by a
+  meaningful margin; current advantage is about `0.91%`, so this is a tie.
+- Do not claim broad model/quant robustness; rows=2048 shaped T4/T1 degraded
+  to about `2.839`, and no cross-quant shaped case has been measured.

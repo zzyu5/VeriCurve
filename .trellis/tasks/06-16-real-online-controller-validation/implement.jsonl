@@ -17,3 +17,11 @@
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/replay_correctness_audit.md", "reason": "Current pro6 finding: scan-mode replay is not selected-path commit-aware."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/policy_family_replay.md", "reason": "Current policy-family results and trace coverage blocker."}
 {"file": ".trellis/tasks/06-16-real-online-controller-validation/research/commit_aware_replay.md", "reason": "Current pro7 commit-aware selected-only replay result and Go/No-Go status."}
+{"file": "doc/VeriCurve-RV-Claude-Critique-Resolution-GoNoGo.md", "reason": "Claude/pro critique task plan and final decision requirements."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/scripts/resolve_claude_critique.py", "reason": "Reproducible script for critique-resolution analysis tables."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/final_decision_matrix.csv", "reason": "Machine-readable final A-E decision matrix."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/claude_critique_resolution_final.md", "reason": "Human-readable final critique resolution and paper version."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/regime_shift_table.csv", "reason": "Old-vs-shaped curve policy regime-shift evidence."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/selected_only_policy_summary.csv", "reason": "Selected-only controller gate metrics including low-regression and overhead status."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/goodput_baseline_comparison.csv", "reason": "Selected-only goodput baseline comparison required by critique D."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/curve_robustness_matrix.csv", "reason": "Core and remote working-set robustness evidence."}

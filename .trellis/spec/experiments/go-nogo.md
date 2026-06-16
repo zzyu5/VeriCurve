@@ -235,6 +235,52 @@ Recommended direction from this evidence is to continue VeriCurve-RV through
 the row-blocked `RTile x TTile` verifier path, with runtime variant selection
 as a secondary mechanism.
 
+## Current Claude-Critique Decision
+
+Task:
+
+```text
+.trellis/tasks/06-16-real-online-controller-validation
+```
+
+Decision matrix:
+
+```text
+A. Curve-shaping beyond kernel speedup: GO
+B. Two-action vs multi-point controller: TWO-ACTION
+C. Selected-only controller: CONDITIONAL
+D. Goodput-only comparison: TIE
+E. Robustness across model/quant/working-set: SCOPED
+Final paper version: B. Curve-shaping systems paper
+```
+
+The regime-shift gate is the main positive systems evidence:
+
+```text
+code/rag/structured:
+  old curve best d=0
+  shaped curve best d=3
+
+chat/chat_low:
+  shaped curve remains best d=0
+```
+
+Robustness gate is scoped:
+
+```text
+rows512 shaped T4/T1 = 1.399
+rows128 shaped T4/T1 = 1.701
+rows2048 shaped T4/T1 = 2.839
+```
+
+Do not promote the project to a broad full-system speedup claim until at least
+one of the following is true:
+
+- selected-only/runtime controller reaches `>=90%` oracle and beats goodput-only
+  by `>=5%`;
+- a real runtime `choose_d()` loop measures controller overhead below `1%`;
+- a realistic larger-layer or alternate-quant shaped curve keeps `T4/T1 <= 1.8`.
+
 Current post-Experiment-1 labels may be more specific:
 
 ```text

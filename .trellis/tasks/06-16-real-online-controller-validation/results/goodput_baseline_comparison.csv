@@ -1,0 +1,5 @@
+comparison_label,policy,policy_class,observability,ms_per_token,speedup_vs_fixed_d3_pct,oracle_reach,curve_aware_advantage_vs_goodput_pct,choices,notes
+best_curve_aware_selected,vericurve_selected_t0.4_p16,curve_aware_threshold,selected_only,9.078115,12.888843,0.891164,0.909594,d0=1274;d3=468,selected-only commit-aware replay
+best_goodput_only_selected,goodput_ucb_c0.02_p16,goodput_only_ucb,selected_only,9.160689,11.871269,0.883131,0.909594,d0=1246;d3=500,selected-only commit-aware replay
+fixed_d3,fixed_d3,fixed,fixed,10.248179,0.0,0.789417,0.909594,d3=1556,strong fixed speculation baseline
+oracle_multipoint,oracle_multipoint,oracle,full_candidate_info,8.090088,26.675742,1.0,0.909594,d0=1148;d3=408,"commit-aware DP oracle, not runtime observable"

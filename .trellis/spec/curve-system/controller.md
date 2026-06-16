@@ -223,6 +223,68 @@ EWMA full-info replay is promising but reaches only 84.9% oracle
 This remains conditional evidence. It should not be described as a real online
 controller until a selected-only replay or runtime `choose_d()` loop exists.
 
+## Current Selected-Only Critique Result
+
+Task:
+
+```text
+.trellis/tasks/06-16-real-online-controller-validation
+```
+
+Required command shape:
+
+```text
+python3 scripts/resolve_claude_critique.py \
+  --position-complete results/position_complete_candidate_trace.csv \
+  --verify <C_verify_best_curve.csv> \
+  --old-workingset <synthetic_workingset_sweep.csv> \
+  --curve-summary <curve_shaping_summary.csv> \
+  --variant-timing <variant_timing.csv> \
+  --remote-rtile-results results/remote_claude_critique \
+  --out results
+```
+
+Current selected-only result:
+
+```text
+policy: vericurve_selected_t0.4_p16
+actions: {d=0,d=3}
+ms/token: 9.078115
+speedup vs fixed d3: 12.888843%
+oracle reach: 0.891164
+low-acceptance regression vs fixed d0: 0.544128%
+controller overhead: not measured, replay-only
+```
+
+Goodput-only comparison:
+
+```text
+best goodput-only selected policy: goodput_ucb_c0.02_p16
+ms/token: 9.160689
+curve-aware advantage: 0.909594%
+status: TIE
+```
+
+Controller claim boundary:
+
+```text
+CONDITIONAL, not FULL SYSTEM GO
+```
+
+Wrong:
+
+```text
+VeriCurve-RV proves a strong multi-point adaptive controller.
+```
+
+Correct:
+
+```text
+The shaped verifier curve supports a selected-only two-action curve-gated
+policy that beats fixed d=3, but goodput-only selected feedback nearly matches
+it and runtime overhead is not yet measured.
+```
+
 ## Commit-Aware Replay Contract
 
 ### 1. Scope / Trigger

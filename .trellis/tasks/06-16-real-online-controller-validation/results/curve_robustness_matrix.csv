@@ -1,0 +1,12 @@
+case,rows,hidden_n,quant,C_best_T1,C_best_T4,ratio_T4_T1,winner_T1,winner_T4,speedup_vs_old_T4,evidence_status,conclusion
+current_rows512_q4_0_x_q8_0_best_curve,512,11008,Q4_0xQ8_0,12.024,16.826,1.399368,old_vecdot_nrc1,R8_rowblocked_weights_total,2.857837,measured_current_core_case,SCOPED_GO_core_rows512_ratio_le_1.8
+old_vecdot_rows32_q4_0_x_q8_0_workingset,32,11008,Q4_0xQ8_0,0.748,3.051,4.078877,old_vecdot_nrc1,old_vecdot_nrc1,1.0,old_curve_only,old_path_near_linear_working_set_reference
+old_vecdot_rows128_q4_0_x_q8_0_workingset,128,11008,Q4_0xQ8_0,2.554,10.203,3.99491,old_vecdot_nrc1,old_vecdot_nrc1,1.0,old_curve_only,old_path_near_linear_working_set_reference
+old_vecdot_rows512_q4_0_x_q8_0_workingset,512,11008,Q4_0xQ8_0,10.685,42.742,4.000187,old_vecdot_nrc1,old_vecdot_nrc1,1.0,old_curve_only,old_path_near_linear_working_set_reference
+old_vecdot_rows2048_q4_0_x_q8_0_workingset,2048,11008,Q4_0xQ8_0,43.74,175.159,4.00455,old_vecdot_nrc1,old_vecdot_nrc1,1.0,old_curve_only,old_path_near_linear_working_set_reference
+rows512_variant_R1_no_pack,512,11008,Q4_0xQ8_0,36.762,41.465,1.127931,R1_no_pack,R1_no_pack,1.159653,same_rows_variant_measurement,supports_RTile_TTile_crossover
+rows512_variant_R2_no_pack,512,11008,Q4_0xQ8_0,21.809,35.202,1.614104,R2_no_pack,R2_no_pack,1.365974,same_rows_variant_measurement,supports_RTile_TTile_crossover
+rows512_variant_R4_no_pack,512,11008,Q4_0xQ8_0,19.532,31.586,1.617141,R4_no_pack,R4_no_pack,1.522352,same_rows_variant_measurement,supports_RTile_TTile_crossover
+rows512_variant_R8_no_pack,512,11008,Q4_0xQ8_0,21.021,30.094,1.431616,R8_no_pack,R8_no_pack,1.597827,same_rows_variant_measurement,supports_RTile_TTile_crossover
+remote_shaped_rows128_q4_0_x_q8_0,128,11008,Q4_0xQ8_0,2.996372,5.097,1.701057,old_vecdot_nrc1,R8_Layout2_rowblocked_weights,2.103349,smaller_working_set_shaped,PASS_ratio_le_1.8
+remote_shaped_rows2048_q4_0_x_q8_0,2048,11008,Q4_0xQ8_0,25.992796,73.802,2.839325,old_vecdot_nrc1,R8_Layout2_rowblocked_weights,1.410038,larger_working_set_shaped,WEAK_ratio_gt_2.5
