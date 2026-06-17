@@ -1,0 +1,11 @@
+curve_id,policy,ms_per_token,total_cost_ms,total_tokens,choices,oracle_reach_vs_multi,advantage_vs_goodput_pct,multi_vs_two_oracle_gain_pct,notes
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,no_speculation_d0,12.024267,30661.880000,2550,d0=2550,0.620534,,,fixed d=0
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,fixed_d3,10.248179,26184.098000,2555,d3=1556,0.728077,,,fixed d=3
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,fixed_d7,11.781020,30112.286000,2556,d7=1424,0.633346,,,fixed d=7 real T8
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,best_fixed_per_workload,8.899648,22738.601000,2555,d0=1275;d3=121;d7=254,0.838400,,,upper bound with workload labels choosing best fixed d
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,workload_label_upper_bound,9.155243,23391.646000,2555,d0=1275;d3=479,0.814993,,,manual chat/chat_low d0 and code/rag/structured d3
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,goodput_only_adaptive,9.160689,23396.400000,2554,d0=1246;d3=500,0.814509,,,GoodputUCB c=0.02 p=16
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,curve_plan_aware_selected,9.078115,23194.583000,2555,d0=1274;d3=468,0.821918,0.909599,,VeriCurve selected threshold t=0.4 p=16 using real T8
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,two_action_oracle_d0_d3,8.090088,20670.174000,2555,d0=1148;d3=408,0.922297,,,"oracle restricted to {d0,d3}"
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,full_info_myopic_plan_aware_d0_d1_d3_d7,7.492851,19144.234000,2555,d0=1148;d3=164;d7=122,0.995811,22.259059,,"full-info one-step J(d) using real T8; diagnostic policy, not selected-only runtime controller"
+real_t8_rows512_native_T8_packed_rhs_rowblocked_weights_R16,multi_action_oracle_d0_d1_d3_d7,7.461463,19071.500000,2556,d0=1138;d3=153;d7=133,1.000000,,8.424949,"oracle over {d0,d1,d3,d7}"

@@ -1,0 +1,6 @@
+T,C_verify_old_ms,C_verify_best_ms,winner_variant,source
+1,12.024,12.024,old_vecdot_nrc1,inherited_committed_curve
+2,24.037,24.037,old_vecdot_nrc1,inherited_committed_curve
+4,48.085,16.826,R8_rowblocked_weights_total,inherited_committed_curve
+8,96.062,21.144,real_rvv_native_T8_packed_rhs_rowblocked_weights_R16,real_rvv_t8_rows512
+16,192.028,42.288,two_real_rvv_native_T8_packed_rhs_rowblocked_weights_R16,inherited_committed_curve

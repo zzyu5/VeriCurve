@@ -1,0 +1,23 @@
+=== date ===
+Wed Jun 17 01:58:04 UTC 2026
+=== hostname ===
+ubuntu
+=== uname ===
+Linux ubuntu 6.12.23 #1 SMP Thu Apr 17 11:46:50 EDT 2025 riscv64 riscv64 riscv64 GNU/Linux
+=== uptime ===
+ 01:58:04 up 14 days, 22:48,  3 users,  load average: 0.11, 0.33, 0.28
+=== nproc ===
+64
+=== memory ===
+               total        used        free      shared  buff/cache   available
+Mem:           121Gi       2.3Gi        92Gi       6.1Mi        28Gi       119Gi
+Swap:             0B          0B          0B
+=== who ===
+ubuntu   pts/0        2026-06-15 07:56 (192.168.102.64)
+ubuntu   pts/1        2026-06-14 14:14 (192.168.102.64)
+=== heavy processes ===
+No active llama/cmake/ninja/gcc/g++/clang/make/TianchenRV/Codex heavy job was visible.
+
+Notes:
+- The grep command itself and the transient ssh/bash/ps processes were visible.
+- Top CPU was the transient ps command from this safety check.

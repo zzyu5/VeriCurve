@@ -18,7 +18,9 @@
   "commit": null,
   "pr_url": null,
   "subtasks": [],
-  "children": [],
+  "children": [
+    "06-17-real-rvv-t8-verifier-plan-gate"
+  ],
   "parent": null,
   "relatedFiles": [],
   "notes": "",

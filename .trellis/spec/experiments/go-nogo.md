@@ -281,7 +281,7 @@ one of the following is true:
 - a real runtime `choose_d()` loop measures controller overhead below `1%`;
 - a realistic larger-layer or alternate-quant shaped curve keeps `T4/T1 <= 1.8`.
 
-## Current A-Level Innovation Search Decision
+## Superseded Replay-Only A-Level Innovation Search Decision
 
 Task:
 
@@ -300,12 +300,11 @@ research/a_level_go_nogo.md
 Decision:
 
 ```text
-A-level candidate found? NO
+A-level candidate found? NO  # provisional replay-only result
 ```
 
-This supersedes treating Version B as the next writing step. Version B remains
-only a scoped fallback result. The current project should stay in research
-discovery mode until the decisive verifier-plan synthesis gate passes or fails.
+This superseded treating Version B as the next writing step, but it was not a
+final A-level No-Go because no new RVV T8 experiment had been run yet.
 
 Candidate results:
 
@@ -335,6 +334,71 @@ on rows2048 or an alternate realistic quant/path.
 
 NO-GO / pivot if T8 cannot reach C8/C1 <= 2.1, or if it reaches that threshold
 but goodput-only still matches the plan-aware policy.
+```
+
+## Current Real RVV T8 Verifier-Plan Gate Decision
+
+Task:
+
+```text
+.trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate
+```
+
+Required artifacts:
+
+```text
+research/rvv_t8_safety_check.md
+research/t8_path_audit.md
+scripts/bench_t8_verifier_plan.cpp
+patches/t8_verifier_plan.patch
+results/real_rvv_t8_curve.csv
+results/real_rvv_t8_replay_matrix.csv
+research/real_rvv_t8_gate.md
+research/real_rvv_t8_policy_impact.md
+```
+
+Decision:
+
+```text
+real RVV T8 verifier-plan mechanism gate: GO
+paper/full online-controller gate: not complete
+```
+
+Measured best T8:
+
+```text
+rows512:
+  candidate = native_T8_packed_rhs_rowblocked_weights, R=16
+  C8/C1 = 1.754
+  speedup_vs_old_T8 = 4.550x
+
+rows2048:
+  candidate = native_T8_packed_rhs_rowblocked_weights, R=16
+  C8/C1 = 2.130
+  speedup_vs_old_T8 = 3.460x
+```
+
+Policy replay with real T8:
+
+```text
+multi-action oracle over {d0,d1,d3,d7}: 7.461463 ms/token
+two-action oracle over {d0,d3}:          8.090088 ms/token
+multi-action gain:                       8.424949%
+
+full-info myopic plan-aware:             7.492851 ms/token
+goodput-only adaptive:                   9.160689 ms/token
+plan-aware advantage vs goodput-only:    22.259059%
+
+existing selected-only two-action:       9.078115 ms/token
+selected-only advantage vs goodput-only: 0.909599%
+```
+
+Current next gate:
+
+```text
+Design and validate a selected-only or low-observability multi-action
+plan-aware controller. It must recover enough of the full-info plan-aware gain
+without oracle access and without reverting to a two-action {d0,d3} policy.
 ```
 
 Current post-Experiment-1 labels may be more specific:

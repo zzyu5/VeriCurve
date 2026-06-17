@@ -1,0 +1,269 @@
+--- .trellis/tasks/06-16-post-direct-t4-go-nogo/scripts/bench_rtile_ttile_kernel.cpp	2026-06-16 13:09:16.758483671 +0800
++++ .trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/scripts/bench_t8_verifier_plan.cpp	2026-06-17 10:01:40.889830360 +0800
+@@ -11,7 +11,7 @@
+ #include <cstdint>
+ #include <vector>
+
+-static constexpr int MAX_R = 8;
++static constexpr int MAX_R = 16;
+ static constexpr int MAX_T = 8;
+
+ static float value_at(int i) {
+@@ -108,6 +108,18 @@
+     }
+ }
+
++static std::vector<block_q8_0> slice_rhs(
++        const std::vector<block_q8_0> & rhs,
++        int nb,
++        int token_offset,
++        int T) {
++    std::vector<block_q8_0> out((size_t) T * nb);
++    const auto begin = rhs.begin() + (size_t) token_offset * nb;
++    const auto end = rhs.begin() + (size_t) (token_offset + T) * nb;
++    std::copy(begin, end, out.begin());
++    return out;
++}
++
+ static void pack_weights_rowblocked(
+         const std::vector<block_q4_0> & weights,
+         std::vector<block_q4_0> & packed_weights,
+@@ -346,6 +358,52 @@
+     return total_ns / repeats;
+ }
+
++static double bench_composed_t4x2(
++        int rows,
++        int R,
++        int repeats,
++        int warmup,
++        bool use_packed_rhs,
++        bool use_rowblocked_weights,
++        const std::vector<block_q4_0> & weights,
++        const std::vector<block_q4_0> & packed_weights,
++        const std::vector<block_q8_0> & rhs_first4,
++        const std::vector<block_q8_0> & packed_rhs_first4,
++        const std::vector<block_q8_0> & rhs_second4,
++        const std::vector<block_q8_0> & packed_rhs_second4,
++        int nb,
++        volatile float & sink) {
++    const int row_groups = rows / R;
++    double total_ns = 0.0;
++
++    for (int iter = 0; iter < warmup + repeats; ++iter) {
++        const double t0 = seconds_now();
++        for (int rg = 0; rg < row_groups; ++rg) {
++            float acc_first[MAX_R][MAX_T] = {};
++            float acc_second[MAX_R][MAX_T] = {};
++            accumulate_group(rg, R, 4, use_packed_rhs, use_rowblocked_weights,
++                             weights, packed_weights,
++                             rhs_first4, packed_rhs_first4, nb, acc_first);
++            accumulate_group(rg, R, 4, use_packed_rhs, use_rowblocked_weights,
++                             weights, packed_weights,
++                             rhs_second4, packed_rhs_second4, nb, acc_second);
++
++            float local = 0.0f;
++            for (int rr = 0; rr < R; ++rr) {
++                for (int tt = 0; tt < 4; ++tt) {
++                    local += acc_first[rr][tt] + acc_second[rr][tt];
++                }
++            }
++            sink += local * 0.0000001f;
++        }
++        const double t1 = seconds_now();
++        if (iter >= warmup) {
++            total_ns += (t1 - t0) * 1.0e9;
++        }
++    }
++    return total_ns / repeats;
++}
++
+ static void check_candidate(
+         int n,
+         int rows,
+@@ -383,6 +441,51 @@
+     }
+ }
+
++static void check_composed_t4x2(
++        int n,
++        int rows,
++        int R,
++        bool use_packed_rhs,
++        bool use_rowblocked_weights,
++        const std::vector<block_q4_0> & weights,
++        const std::vector<block_q4_0> & packed_weights,
++        const std::vector<block_q8_0> & rhs_full,
++        const std::vector<block_q8_0> & rhs_first4,
++        const std::vector<block_q8_0> & packed_rhs_first4,
++        const std::vector<block_q8_0> & rhs_second4,
++        const std::vector<block_q8_0> & packed_rhs_second4,
++        int nb,
++        double & max_abs,
++        double & max_rel) {
++    const int row_groups = rows / R;
++
++    for (int rg = 0; rg < row_groups; ++rg) {
++        float acc_first[MAX_R][MAX_T] = {};
++        float acc_second[MAX_R][MAX_T] = {};
++        accumulate_group(rg, R, 4, use_packed_rhs, use_rowblocked_weights,
++                         weights, packed_weights,
++                         rhs_first4, packed_rhs_first4, nb, acc_first);
++        accumulate_group(rg, R, 4, use_packed_rhs, use_rowblocked_weights,
++                         weights, packed_weights,
++                         rhs_second4, packed_rhs_second4, nb, acc_second);
++
++        for (int rr = 0; rr < R; ++rr) {
++            const int row = rg * R + rr;
++            const block_q4_0 * x = weights.data() + (size_t) row * nb;
++            for (int tt = 0; tt < 8; ++tt) {
++                float ref = 0.0f;
++                const block_q8_0 * y = rhs_full.data() + (size_t) tt * nb;
++                ggml_vec_dot_q4_0_q8_0(n, &ref, 0, x, 0, y, 0, 1);
++                const float got = tt < 4 ? acc_first[rr][tt] : acc_second[rr][tt - 4];
++                const double diff = std::fabs((double) ref - (double) got);
++                const double denom = std::fabs((double) ref) + 1.0e-9;
++                max_abs = std::fmax(max_abs, diff);
++                max_rel = std::fmax(max_rel, diff / denom);
++            }
++        }
++    }
++}
++
+ static void print_matrix_row(
+         const char * layout,
+         int R,
+@@ -443,6 +546,38 @@
+                 max_rel);
+ }
+
++static void print_t8_plan_row(
++        const char * plan,
++        int R,
++        int n,
++        int rows,
++        int repeats,
++        double pack_rhs_ns,
++        double pack_weight_ns,
++        double kernel_ns,
++        double old_t1_ns,
++        double old_t8_ns,
++        double max_abs,
++        double max_rel) {
++    const double total_ns = pack_rhs_ns + pack_weight_ns + kernel_ns;
++    std::printf("%s,%d,8,%d,%d,%d,%.0f,%.0f,%.0f,%.0f,%.3f,%.3f,%.3f,%.3f,%.9g,%.9g\n",
++                plan,
++                R,
++                n,
++                rows,
++                repeats,
++                pack_rhs_ns,
++                pack_weight_ns,
++                kernel_ns,
++                total_ns,
++                total_ns / 1.0e6,
++                total_ns / old_t1_ns,
++                old_t8_ns / total_ns,
++                total_ns / old_t8_ns,
++                max_abs,
++                max_rel);
++}
++
+ int main(int argc, char ** argv) {
+     int n = 11008;
+     int rows = 512;
+@@ -489,9 +624,10 @@
+         old_ns[T] = bench_old(n, rows, T, repeats, warmup, weights, rhs, nb, sink);
+     }
+
+-    std::fprintf(stderr, "old_t1_ns=%.0f old_t4_ns=%.0f sink=%g\n", old_ns[1], old_ns[4], (float) sink);
++    std::fprintf(stderr, "old_t1_ns=%.0f old_t4_ns=%.0f old_t8_ns=%.0f sink=%g\n",
++                 old_ns[1], old_ns[4], old_ns[8], (float) sink);
+
+-    const int Rs[] = {1, 2, 4, 8};
++    const int Rs[] = {1, 2, 4, 8, 16};
+     std::printf("kind,layout,R,T,n,rows,repeats,avg_ns,avg_ms,ratio_vs_old_t1,ratio_vs_old_T,max_abs,max_rel\n");
+     for (int R : Rs) {
+         for (int T : Ts) {
+@@ -551,6 +687,81 @@
+         }
+     }
+
++    const std::vector<block_q8_0> rhs_first4 = slice_rhs(rhs, nb, 0, 4);
++    const std::vector<block_q8_0> rhs_second4 = slice_rhs(rhs, nb, 4, 4);
++
++    std::printf("kind,plan,R,T,n,rows,repeats,C_pack_rhs_ns,C_pack_weight_once_ns,C_kernel_ns,C_total_ns,C_total_ms,C8_C1,speedup_vs_old_T8,ratio_vs_old_T8,max_abs,max_rel\n");
++    for (int R : Rs) {
++        std::vector<block_q8_0> packed_rhs8;
++        std::vector<block_q8_0> packed_rhs_first4;
++        std::vector<block_q8_0> packed_rhs_second4;
++        std::vector<block_q4_0> packed_weights;
++        pack_rhs(rhs, packed_rhs8, nb, 8);
++        pack_rhs(rhs_first4, packed_rhs_first4, nb, 4);
++        pack_rhs(rhs_second4, packed_rhs_second4, nb, 4);
++        pack_weights_rowblocked(weights, packed_weights, nb, rows, R);
++
++        const double rhs8_pack_ns = bench_pack_rhs(rhs, nb, 8, repeats, warmup, sink);
++        const double rhs4a_pack_ns = bench_pack_rhs(rhs_first4, nb, 4, repeats, warmup, sink);
++        const double rhs4b_pack_ns = bench_pack_rhs(rhs_second4, nb, 4, repeats, warmup, sink);
++        const double weight_pack_ns = bench_pack_weights(weights, nb, rows, R, repeats, warmup, sink);
++
++        const struct layout_case {
++            const char * name;
++            bool packed_rhs;
++            bool rowblocked_weights;
++        } cases[] = {
++            {"no_pack", false, false},
++            {"packed_rhs", true, false},
++            {"rowblocked_weights", false, true},
++            {"packed_rhs_rowblocked_weights", true, true},
++        };
++
++        for (const auto & c : cases) {
++            double max_abs = 0.0;
++            double max_rel = 0.0;
++            check_candidate(n, rows, R, 8, c.packed_rhs, c.rowblocked_weights,
++                            weights, packed_weights, rhs, packed_rhs8, nb, max_abs, max_rel);
++            const double kernel_ns = bench_candidate(rows, R, 8, repeats, warmup,
++                                                     c.packed_rhs, c.rowblocked_weights,
++                                                     weights, packed_weights, rhs, packed_rhs8, nb, sink);
++            const double charge_rhs = c.packed_rhs ? rhs8_pack_ns : 0.0;
++            const double charge_weight = c.rowblocked_weights ? weight_pack_ns : 0.0;
++            char plan_name[128];
++            std::snprintf(plan_name, sizeof(plan_name), "native_T8_%s", c.name);
++
++            std::printf("t8_plan,");
++            print_t8_plan_row(plan_name, R, n, rows, repeats,
++                              charge_rhs, charge_weight, kernel_ns,
++                              old_ns[1], old_ns[8], max_abs, max_rel);
++        }
++
++        for (const auto & c : cases) {
++            double max_abs = 0.0;
++            double max_rel = 0.0;
++            check_composed_t4x2(n, rows, R, c.packed_rhs, c.rowblocked_weights,
++                                weights, packed_weights, rhs,
++                                rhs_first4, packed_rhs_first4,
++                                rhs_second4, packed_rhs_second4,
++                                nb, max_abs, max_rel);
++            const double kernel_ns = bench_composed_t4x2(rows, R, repeats, warmup,
++                                                         c.packed_rhs, c.rowblocked_weights,
++                                                         weights, packed_weights,
++                                                         rhs_first4, packed_rhs_first4,
++                                                         rhs_second4, packed_rhs_second4,
++                                                         nb, sink);
++            const double charge_rhs = c.packed_rhs ? rhs4a_pack_ns + rhs4b_pack_ns : 0.0;
++            const double charge_weight = c.rowblocked_weights ? weight_pack_ns : 0.0;
++            char plan_name[128];
++            std::snprintf(plan_name, sizeof(plan_name), "composed_2xT4_%s", c.name);
++
++            std::printf("t8_plan,");
++            print_t8_plan_row(plan_name, R, n, rows, repeats,
++                              charge_rhs, charge_weight, kernel_ns,
++                              old_ns[1], old_ns[8], max_abs, max_rel);
++        }
++    }
++
+     if (std::isnan((float) sink)) {
+         std::fprintf(stderr, "sink is nan\n");
+         return 3;

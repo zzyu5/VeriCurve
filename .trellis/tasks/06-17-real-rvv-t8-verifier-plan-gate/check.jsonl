@@ -1,0 +1,11 @@
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/prd.md", "reason": "Check all requested real RVV T8 artifacts and final answer fields."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Check remote work stayed within safety limits."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Check raw logs, patches, command metadata, and CSV outputs are preserved."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Check T8 Go/Conditional/No-Go labels and thresholds."}
+{"file": ".trellis/spec/curve-system/controller.md", "reason": "Check replay/oracle/goodput scoring uses total-cost-over-total-output semantics."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/rvv_t8_safety_check.md", "reason": "Check remote safety decision before mutation/build."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/t8_path_audit.md", "reason": "Check T8 path classification and remote command metadata."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/results/real_rvv_t8_curve.csv", "reason": "Check T8 measured curve and correctness metrics."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/results/real_rvv_t8_replay_matrix.csv", "reason": "Check real T8 replay matrix and policy gates."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/real_rvv_t8_gate.md", "reason": "Check final T8 gate decision."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/real_rvv_t8_policy_impact.md", "reason": "Check policy impact interpretation."}

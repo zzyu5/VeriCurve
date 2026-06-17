@@ -469,8 +469,8 @@ Task:
 .trellis/tasks/06-16-real-online-controller-validation
 ```
 
-The A-level innovation search keeps the controller contribution in a negative
-or supporting role:
+The replay-only A-level innovation search kept the controller contribution in a
+negative or supporting role:
 
 ```text
 selected-only curve-aware: 9.078115 ms/token
@@ -480,24 +480,35 @@ oracle reach: 0.891164
 multi-action gain over {d0,d3}: 0.0%
 ```
 
+That snapshot is superseded for multi-action opportunity by the real RVV T8
+gate:
+
+```text
+task: .trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate
+real rows512 T8 C8/C1: 1.754
+real rows2048 T8 C8/C1: 2.130
+multi-action oracle gain over {d0,d3}: 8.424949%
+full-info myopic plan-aware advantage vs goodput-only: 22.259059%
+existing selected-only two-action advantage vs goodput-only: 0.909599%
+```
+
 Current controller claim:
 
 ```text
-The selected-only curve-aware policy is useful evidence that shaped C_verify(T)
-changes viable speculation regimes, but it is not a strong standalone adaptive
-controller result.
+Real RVV T8 makes multi-action speculation structurally meaningful, but the
+existing selected-only controller is still only a two-action {d0,d3} policy and
+does not exploit d7.
 ```
 
-Do not claim an A-level controller mechanism unless curve-aware selection beats
-goodput-only by at least `5%`, reaches at least `90%` oracle, and produces a
-meaningful action set beyond the current `{d=0,d=3}` collapse.
-
-The next controller-relevant gate is not another threshold tweak. It is a
-verifier-plan synthesis gate:
+The next controller-relevant gate is no longer "can T8 reach the threshold?"
+That gate passed for rows512. The next gate is:
 
 ```text
-native/composed RVV T8 with C8/C1 <= 2.1
+selected-only or low-observability multi-action plan-aware controller over
+d={0,1,3,7}
 ```
 
-Without that T8 gate, d7 remains structurally unattractive and controller
-experiments mostly compare two-action policies against goodput-only feedback.
+Do not claim a finished online-controller mechanism unless this controller
+beats goodput-only by at least `5%`, reaches at least `90%` of the multi-action
+oracle, and does not rely on full-info/oracle candidate outcomes at the current
+position.

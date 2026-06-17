@@ -1,0 +1,19 @@
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/prd.md", "reason": "Primary requirements for the real RVV T8 verifier-plan gate."}
+{"file": ".trellis/spec/llamacpp-rvv/remote-rvv-safety.md", "reason": "Remote rvv safety protocol and stop conditions."}
+{"file": ".trellis/spec/llamacpp-rvv/runtime-boundary.md", "reason": "Allowed llama.cpp/RVV touch points for narrow harness-level experiments."}
+{"file": ".trellis/spec/experiments/artifacts.md", "reason": "Required metadata, raw logs, patches, and CSV artifact conventions."}
+{"file": ".trellis/spec/experiments/go-nogo.md", "reason": "Verifier-curve and T8 A-level Go/No-Go gates."}
+{"file": ".trellis/spec/curve-system/controller.md", "reason": "Replay, oracle, goodput-only, and controller scoring conventions."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/research/a_level_go_nogo.md", "reason": "Prior provisional No-Go and T8 threshold that this task must verify with real RVV evidence."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/results/innovation_t8_threshold_sweep.csv", "reason": "Synthetic threshold sweep establishing the C8/C1 gate."}
+{"file": ".trellis/tasks/06-16-real-online-controller-validation/scripts/search_a_level_mechanisms.py", "reason": "Reusable replay script for policy impact after inserting real T8 measurements."}
+{"file": ".trellis/tasks/06-16-post-direct-t4-go-nogo/research/final_go_nogo_summary.md", "reason": "R8T4 strong-go baseline and existing curve-shaping facts."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/rvv_t8_safety_check.md", "reason": "Remote safety check and decision to proceed."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/t8_path_audit.md", "reason": "Existing T8 route audit and task harness compile/run metadata."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/real_rvv_t8_gate.md", "reason": "Real RVV T8 gate result and mechanism interpretation."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/research/real_rvv_t8_policy_impact.md", "reason": "Replay policy impact using real RVV T8 measurement."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/scripts/bench_t8_verifier_plan.cpp", "reason": "Task-owned real RVV T8 verifier plan harness."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/patches/t8_verifier_plan.patch", "reason": "Patch from previous RTile harness to T8 verifier-plan harness."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/results/real_rvv_t8_curve.csv", "reason": "Measured rows512 and rows2048 T8 candidate curve summary."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/results/real_rvv_t8_replay_matrix.csv", "reason": "Policy replay matrix after inserting real RVV T8 cost."}
+{"file": ".trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate/results/C_verify_real_t8_rows512.csv", "reason": "Verifier curve used for real T8 policy replay."}

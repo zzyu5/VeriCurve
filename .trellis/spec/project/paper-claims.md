@@ -38,9 +38,9 @@ Version B framing is only a conservative fallback boundary:
 Version B: curve-shaping systems paper
 ```
 
-It is not a current instruction to write the paper. The A-level innovation
-search found no mechanism-level candidate that passes all gates from current
-evidence.
+It is not a current instruction to write the paper. The replay-only A-level
+innovation search found no mechanism-level candidate from existing evidence,
+but that conclusion was provisional until a real RVV T8 gate was run.
 
 Allowed current fallback claim:
 
@@ -50,7 +50,7 @@ changes speculation viability: code/rag/structured shift from old-curve
 best d=0 to shaped-curve best d=3, while chat/chat_low remain d=0.
 ```
 
-Required phrasing:
+Current fallback phrasing before the real T8 result:
 
 ```text
 curve-gated speculation over {d=0,d=3}
@@ -59,29 +59,43 @@ curve-gated speculation over {d=0,d=3}
 Avoid current overclaims:
 
 - Do not call the current controller a strong new adaptive algorithm.
-- Do not claim multi-point control over `d={0,1,3,7}`; oracle gain from adding
-  `d=1,d=7` is currently `0.000%`.
 - Do not claim curve-aware selected-only control beats goodput-only by a
   meaningful margin; current advantage is about `0.91%`, so this is a tie.
-- Do not claim broad model/quant robustness; rows=2048 shaped T4/T1 degraded
-  to about `2.839`, and no cross-quant shaped case has been measured.
+- Do not claim broad model/quant robustness; rows2048 real T8 is a near-pass,
+  not a broad cross-quant/model result.
 
-Current A-level decision:
-
-```text
-A-level candidate found? NO
-```
-
-The closest candidate is verifier-plan synthesis, but current measured or
-composed plans do not make multi-point speculation valuable:
+Replay-only A-level decision, now superseded by the real T8 gate:
 
 ```text
-current C8/C1 = 3.454508
-two-T4 composed C8/C1 = 2.798736
-max C8/C1 with multi-action gain >= 5% = 2.1
+A-level candidate found? NO  # provisional replay-only result
 ```
 
-Do not promote VeriCurve-RV beyond the fallback curve-shaping boundary unless a
-real native/composed RVV T8 verifier plan reaches about `C8/C1 <= 2.1`, beats
-goodput/fixed-d killer baselines, and survives at least one robustness setting
-such as rows=2048 or an alternate realistic quant/path.
+Current real RVV T8 verifier-plan decision:
+
+```text
+task: .trellis/tasks/06-17-real-rvv-t8-verifier-plan-gate
+best rows512 real T8: native_T8_packed_rhs_rowblocked_weights, R=16
+rows512 C8/C1 = 1.754
+rows2048 C8/C1 = 2.130
+multi-action oracle gain over {d0,d3} = 8.424949%
+full-info myopic plan-aware advantage vs goodput-only = 22.259059%
+existing selected-only two-action advantage vs goodput-only = 0.909599%
+```
+
+Allowed current mechanism claim:
+
+```text
+Real RVV verifier-plan synthesis can reshape C_verify(8) enough to make d7 and
+multi-action speculation meaningful in replay.
+```
+
+Current boundary:
+
+```text
+mechanism gate: GO
+paper/full online-controller gate: not complete
+```
+
+Do not write a paper or claim a selected-only online controller until a
+low-observability/runtime controller recovers enough of the full-info
+plan-aware gain without oracle access.
